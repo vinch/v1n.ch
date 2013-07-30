@@ -1,0 +1,18 @@
+extends layout
+
+block title
+  title Vinch
+
+block meta
+  meta(name='description', content='Hi, I\'m Vinch. And this is my website.')
+  meta(property='og:image', content='http://v1n.ch/img/me.jpg')
+
+block stylesheets
+  != css('home')
+
+block javascripts
+  != js('home')
+
+block main
+  #home
+    h1 Hello!
