@@ -18,9 +18,21 @@ html.no-js(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
     block meta
     block stylesheets
+    script(type='text/javascript', src='//use.typekit.net/pek2yuw.js')
+    script(type='text/javascript') try{Typekit.load();}catch(e){}
   
   body
-    block body
+
+    #container
+
+      header
+        h1: a(href='/') Hello, I'm <strong>Vinch</strong>
+        .subtitle And this is my website.
+
+      #content
+        block body
+
+      footer &copy 2013 Vincent Battaglia
 
     script(src='/js/dist/website.min.js')
     block javascripts
