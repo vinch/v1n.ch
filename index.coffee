@@ -49,6 +49,9 @@ app.all '*', logRequest, (req, res, next) ->
 app.get '/', (req, res) ->
   res.render 'home'
 
+app.get '/about', (req, res) ->
+  res.render 'about'
+
 # 404
 
 app.all '*', (req, res) ->
