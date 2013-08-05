@@ -7,7 +7,9 @@ block meta
   meta(name='description', content='Hi, I\'m Vinch. And this is my website.')
   meta(property='og:image', content='http://v1n.ch/img/me.jpg')
 
+block stylesheets
+  != css('404')
+
 block body
-  section
-    h2 404
-    p 
+  #_404
+    a(href='/'): img(src='/img/404.jpg', alt='404')
