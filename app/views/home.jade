@@ -21,20 +21,17 @@ block body
     section
       h2 What?
       p I help building <a href='http://instaply.com' target='_blank'>Instaply</a>. I previously worked in web agencies and startups in Europe and the United States. Check out <a href='http://www.linkedin.com/in/vinch' target='_blank'>my LinkedIn profile</a> to know more about my path and my skills.
+    section#photos
     section#posts
-    //- section
-    //-   h2 Photos
-    //-   p I also post photos on Flickr.
-    //- section
-    //-   h2 Stuff I listen to...
-    //-   p Follow me on Spotify!
-    //- section
-    //-   h2 Stalk me!?
-    //-   p This is where I was recently (powered by Foursquare)
-    //- section
-    //-   h2 Experiments
-    //-   ul
-    //-   p Find more on GitHub
+
+  script(id='photos-template', type='text/x-handlebars-template')
+    h2 Photos
+    .container
+      {{#each photos}}
+      a(href='{{link}}', target='_blank')
+        img(src='{{thumbnail}}', alt='{{title}}')
+      {{/each}}
+    p Follow me on <a href='http://instagram.com/vinch01', target='_blank'>Instagram</a>
 
   script(id='posts-template', type='text/x-handlebars-template')
     h2 Latest posts
@@ -42,5 +39,6 @@ block body
       {{#each posts}}
       li
         h3: a(href='{{link}}') {{{title}}}
-        p {{{summary}}}
+        p: a(href='{{link}}') {{{summary}}}
       {{/each}}
+    p: a(href='http://www.vinch.be', target='_blank') Read more

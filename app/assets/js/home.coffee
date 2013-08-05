@@ -29,6 +29,15 @@ App.View = {
 }
 
 $ ->
+  App.Photos.get { limit: 4 }, {
+    success: (res) ->
+      App.View.render 'photos', {
+        photos: res
+      }
+    error: (err) ->
+      console.log err
+  }
+
   App.Posts.get { limit: 3 }, {
     success: (res) ->
       App.View.render 'posts', {

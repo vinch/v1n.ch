@@ -6,6 +6,7 @@ express = require 'express'
 ca = require 'connect-assets'
 request = require 'request'
 feedparser = require 'feedparser'
+scraper = require 'scraper'
 log = require('logule').init(module)
 
 app = express()
@@ -17,6 +18,8 @@ process.on 'uncaughtException', (err) ->
   log.error err.stack
 
 # configuration
+
+config = require './config.json'
 
 app.configure ->
   app.set 'views', __dirname + '/app/views'
@@ -77,6 +80,21 @@ app.get '/api/posts', (req, res) ->
       res.header 'Content-Type', 'application/json; charset=utf-8'
       res.send posts.slice(0, limit)
     )
+
+app.get '/api/photos', (req, res) ->
+  limit = req.query.limit || 20
+  photos = []
+  request.get('https://api.instagram.com/v1/users/' + config.instagram.user_id + '/media/recent/?access_token=' + config.instagram.access_token + '&count=' + limit, {
+    json: true
+  }, (error, response, body) ->
+    body.data.forEach (item) ->
+      photos.push {
+        title: item.caption.text
+        thumbnail: item.images.thumbnail.url
+        link: item.link
+      }
+    res.send photos
+  )
 
 # 404
 

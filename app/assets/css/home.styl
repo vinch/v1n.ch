@@ -1,6 +1,11 @@
 @import 'nib'
 @import 'common'
 
+#content
+  #posts, #photos
+    h2
+      margin-bottom: 20px
+
 #posts
   ul
     list-style: none
@@ -15,3 +20,26 @@
           color: grayer
           &:hover
             border-color: grayer
+      p
+        a
+          color: darkgray
+          &:hover
+            border-color: darkgray
+
+#photos
+  .container
+    clearfix()
+    margin-bottom: 10px
+    a
+      float: left
+      margin-right: 13.333333333px
+      border: 0    
+      img
+        -webkit-filter: grayscale(1)
+        opacity: 0.8
+      &:hover
+        img
+          -webkit-filter: grayscale(0)
+          opacity: 1
+      &:last-child
+        margin: 0

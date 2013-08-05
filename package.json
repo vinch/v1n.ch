@@ -16,7 +16,8 @@
     "coffee-script": "~1.6.3",
     "logule": "~2.0.0",
     "request": "~2.25.0",
-    "feedparser": "~0.16.1"
+    "feedparser": "~0.16.1",
+    "scraper": "0.0.9"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
