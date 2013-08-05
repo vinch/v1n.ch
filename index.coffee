@@ -5,6 +5,7 @@ http = require 'http'
 express = require 'express'
 ca = require 'connect-assets'
 request = require 'request'
+feedparser = require 'feedparser'
 log = require('logule').init(module)
 
 app = express()
@@ -51,6 +52,31 @@ app.get '/', (req, res) ->
 
 app.get '/about', (req, res) ->
   res.render 'about'
+
+# API
+
+app.get '/api/posts', (req, res) ->
+  limit = req.query.limit || 10
+  posts = []
+  request('http://feeds.feedburner.com/vinch')
+    .pipe(new feedparser())
+    .on('error', (error) ->
+      log.error error
+    )
+    .on('readable', ->
+      stream = @
+      while (item = stream.read())
+        posts.push {
+          title: item.title
+          summary: item.summary
+          link: item.link
+          date: item.date
+        }
+    )
+    .on('end', ->
+      res.header 'Content-Type', 'application/json; charset=utf-8'
+      res.send posts.slice(0, limit)
+    )
 
 # 404
 

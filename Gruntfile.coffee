@@ -6,6 +6,7 @@ module.exports = (grunt) ->
         src: [
           'bower_components/jquery/jquery.js'
           'bower_components/modernizr/modernizr.js'
+          'bower_components/handlebars/handlebars.js'
           'bower_components/underscore/underscore.js'
           'bower_components/underscore.string/dist/underscore.string.min.js'
         ]

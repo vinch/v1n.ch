@@ -21,9 +21,7 @@ block body
     section
       h2 What?
       p I help building <a href='http://instaply.com' target='_blank'>Instaply</a>. I previously worked in web agencies and startups in Europe and the United States. Check out <a href='http://www.linkedin.com/in/vinch' target='_blank'>my LinkedIn profile</a> to know more about my path and my skills.
-    //- section
-    //-   h2 Latests posts
-    //-   ul
+    section#posts
     //- section
     //-   h2 Photos
     //-   p I also post photos on Flickr.
@@ -37,3 +35,12 @@ block body
     //-   h2 Experiments
     //-   ul
     //-   p Find more on GitHub
+
+  script(id='posts-template', type='text/x-handlebars-template')
+    h2 Latest posts
+    ul
+      {{#each posts}}
+      li
+        h3: a(href='{{link}}') {{{title}}}
+        p {{{summary}}}
+      {{/each}}
