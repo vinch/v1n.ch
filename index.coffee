@@ -19,8 +19,6 @@ process.on 'uncaughtException', (err) ->
 
 # configuration
 
-config = require './config.json'
-
 app.configure ->
   app.set 'views', __dirname + '/app/views'
   app.set 'view engine', 'jade'
@@ -84,7 +82,7 @@ app.get '/api/posts', (req, res) ->
 app.get '/api/photos', (req, res) ->
   limit = req.query.limit || 20
   photos = []
-  request.get('https://api.instagram.com/v1/users/' + config.instagram.user_id + '/media/recent/?access_token=' + config.instagram.access_token + '&count=' + limit, {
+  request.get('https://api.instagram.com/v1/users/' + process.env.INSTAGRAM_USER_ID + '/media/recent/?access_token=' + process.env.INSTAGRAM_ACCESS_TOKEN + '&count=' + limit, {
     json: true
   }, (error, response, body) ->
     body.data.forEach (item) ->
