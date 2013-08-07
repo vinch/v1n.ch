@@ -1,4 +1,4 @@
 v1n.ch
 ======
 
-Vinch's personal website
+My personal website
