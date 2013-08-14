@@ -54,6 +54,12 @@ app.get '/', (req, res) ->
 app.get '/about', (req, res) ->
   res.render 'about'
 
+app.get '/experiments', (req, res) ->
+  res.render 'experiments'
+
+app.get '/klout.be', (req, res) ->
+  res.render 'klout'
+
 # API
 
 app.get '/api/posts', (req, res) ->

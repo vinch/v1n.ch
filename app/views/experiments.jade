@@ -1,0 +1,46 @@
+extends layout
+
+block title
+  title Vinch
+
+block meta
+  meta(name='description', content='Hi, I\'m Vinch. And this is my website.')
+  meta(property='og:image', content='http://v1n.ch/img/me.jpg')
+
+block stylesheets
+  != css('experiments')
+
+block body
+  #experiments
+    section
+      h2 Experiments
+      p Here you can find some pieces of code I wrote to learn new tricks or just to have some fun! Everything is on <a href='https://github.com/vinch' target='_blank'>GitHub</a>.
+      ul
+        li
+          h3
+            a(href='https://github.com/vinch/air-quality-belgium', target='_blank') air-quality-belgium
+          p Back when I was in Belgium, I wanted to create a simple web service to get the air quality in major Belgian cities (I don't remember why). Unfortunately, the <a href='http://www.irceline.be' target='_blank'>IRCEL-CELINE</a> doesn't provide any official APIs to get these data. So, I decided to scrape one of their pages with <a href='https://github.com/fabpot/Goutte' target='_blank'>Goutte</a> (PHP) to provide a beautiful result in JSON.
+        li
+          h3
+            a(href='https://github.com/vinch/croche', target='_blank') croche
+          p I implemented this one as an exercise to learn Node.js when I was working at Storify. It's a simple thumbnail generator. Just give it the URL of an image, a width and a height and it will return you a perfect thumbnail.
+        li
+          h3
+            a(href='https://github.com/vinch/gladys', target='_blank') gladys
+          p This is the teaser website of the soon famous singer <a href='http://www.gladysmusic.com' target='_blank'>Gladys</a>. It shows a fullscreen YouTube video and I used their <a href='https://developers.google.com/youtube/js_api_reference' target='_blank'>JavaScript Player API</a> to control it.
+        li
+          h3
+            a(href='https://github.com/vinch/jQuery-Apple-Effect', target='_blank') jquery.appleEffect
+          p My first and only jQuery plugin, written back in 2011. An attempt to reproduce the effect seen multiple times on Apple's website.
+        li
+          h3
+            a(href='https://github.com/vinch/jsonviewer', target='_blank') jsonviewer
+          p I wrote this little PHP script to have a nice way to visualize JSON files in the browser. It became kinda useless when <a href='https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en' target='_blank'>this Chrome plugin</a> went out though.
+        li
+          h3
+            a(href='https://github.com/vinch/peep.js', target='_blank') peep.js
+          p A small side-project I created with <a href='http://brdrck.me' target='_blank'>Jeff Broderick</a> that provides fully customizable sharing buttons for your website. Supported services are: Delicious, Facebook, Google+, LinkedIn, Pinterest and Twitter. The buttons you can see on <a href='http://www.vinch.be' target='_blank'>my blog</a> are powered by peep.js!
+        li
+          h3
+            a(href='https://github.com/vinch/plusonecount', target='_blank') plusonecount
+          p Most of the social media websites provide a URL count (e.g. <a href='http://urls.api.twitter.com/1/urls/count.json?url=http://www.google.com' target='_blank'>Twitter</a> or <a href='http://graph.facebook.com/http://www.google.com' target='_blank'>Facebook</a>) but unfortunately, Google+ doesn't. I needed one for peep.js (see above) so I decided to create it by scraping <a href='https://plusone.google.com/_/+1/fastbutton?url=http://www.google.com' target='_blank'>this page</a>. You can see the result <a href='http://plusonecount.herokuapp.com/?url=http://www.google.com&callback=doSomethingWithThat' target='_blank'>here</a> with a JSONP callback.

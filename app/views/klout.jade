@@ -1,0 +1,19 @@
+extends layout
+
+block title
+  title Belgians on Klout &mdash; Ranking of the most influential people in Belgium
+
+block meta
+  meta(name='description', content='Ranking of Belgian influencers on Klout')
+  meta(property='og:image', content='http://v1n.ch/img/klout.png')
+
+block stylesheets
+  != css('klout')
+
+block body
+  #klout
+    img(src='/img/klout.png')
+    section
+      h2 This page is now closed.
+      p I decided to move the whole website (<a href='http://v1n.ch'>v1n.ch</a>) to a Node.js instance on Heroku due to numerous issues with my previous hosting provider. As the Klout ranking was built with PHP, it doesn't work anymore on this server.
+      p However, the project is <strong>not dead</strong>. You can find the source code on <a href='https://github.com/vinch/kloutbe', target='_blank'>GitHub</a>. Feel free to host it on your own server!

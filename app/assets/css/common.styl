@@ -31,7 +31,8 @@ img
   display: block
 
 #container
-  width: 640px
+  max-width: 640px
+  padding: 0 20px
   margin: 0 auto
 
   header
@@ -64,8 +65,8 @@ img
     margin-bottom: 40px
     h2
       font-size: 30px
-      line-height: 1em
-      margin-bottom: 10px
+      line-height: 1.2em
+      margin-bottom: 5px
       font-family: 'adelle-sans', sans-serif
       color: black
     p
@@ -75,3 +76,11 @@ img
       margin-bottom: 20px
       strong
         color: darkergray
+
+@media (max-width: 500px)
+  #container
+    header
+      padding-top: 50px
+    footer
+      padding-bottom: 50px
+      margin-top: 50px
