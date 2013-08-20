@@ -45,7 +45,7 @@ logRequest = (req, res, next) ->
 
 redirectWWW = (req, res, next) ->
   if req.headers.host.match(/^www/) isnt null
-    res.redirect 'http://' + req.headers.host.replace(/^www\./, '') + req.url
+    res.redirect 301, 'http://' + req.headers.host.replace(/^www\./, '') + req.url
   else
     next()
 
