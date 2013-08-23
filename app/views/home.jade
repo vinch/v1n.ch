@@ -41,10 +41,10 @@ block body
 
   script(id='posts-template', type='text/x-handlebars-template')
     h2 Latest posts
-    p I started my blog back in 2006. For now, it's only in French but I plan to write posts in English in the future.
+    p I started <a href='http://www.vinch.be'>my blog</a> back in 2006. For now, it’s only in French but I plan to write posts in English in the future.
     ul
       {{#each posts}}
       li
-        h3: a(href='{{link}}', target='_blank') {{{title}}}
-        p: a(href='{{link}}', target='_blank') {{{summary}}}
+        h3: a(href='{{link}}') {{{title}}}
+        p: a(href='{{link}}') {{{summary}}}
       {{/each}}
