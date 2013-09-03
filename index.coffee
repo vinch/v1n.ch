@@ -100,7 +100,7 @@ app.get '/api/photos', (req, res) ->
   }, (error, response, body) ->
     body.data.forEach (item) ->
       photos.push {
-        title: item.caption.text
+        title: item.caption?.text
         thumbnail: item.images.thumbnail.url
         link: item.link
       }
