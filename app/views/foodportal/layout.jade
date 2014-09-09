@@ -1,0 +1,57 @@
+!!! 5
+//if lt IE 7
+  html.no-js.lt-ie10.lt-ie9.lt-ie8.lt-ie7(lang='en', ng-app='foodPortalApp')
+//if IE 7
+  html.no-js.lt-ie10.lt-ie9.lt-ie8(lang='en', ng-app='foodPortalApp')
+//if IE 8
+  html.no-js.lt-ie10.lt-ie9(lang='en', ng-app='foodPortalApp')
+//if IE 9
+  html.no-js.lt-ie10(lang='en', ng-app='foodPortalApp')
+//[if gt IE 9]><!
+html.no-js(lang='en', ng-app='foodPortalApp')
+  //<![endif]
+  
+  head
+    title The Food Portal &mdash; Eat Real &amp; Local
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    meta(name='description', content='Places, Articles, Books, Recipes and Brands curated by Sandra Cabrera de Diego and Vincent Battaglia')
+    meta(property='og:image', content='http://v1n.ch/img/foodportal/thumbnail.png')
+    != css('foodportal/main')
+    script(type='text/javascript', src='//use.typekit.net/pek2yuw.js')
+    script(type='text/javascript') try{Typekit.load();}catch(e){}
+  
+  body
+
+    #container
+
+      header
+        h1 The Food Portal
+
+      nav.main
+        a(ui-sref='places', ui-sref-active='active') PLACES
+        a(ui-sref='articles', ui-sref-active='active') ARTICLES
+        a(ui-sref='books', ui-sref-active='active') BOOKS
+        a(ui-sref='products', ui-sref-active='active') PRODUCTS
+        a(ui-sref='recipes', ui-sref-active='active') RECIPES
+
+      #content(ui-view='')
+
+      footer &copy #{new Date().getFullYear()} The Food Portal
+
+    script(src='/js/dist/foodportal.min.js')
+    != js('foodportal/app')
+    != js('foodportal/controllers')
+    != js('foodportal/services')
+    script.
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-192063-4']);
+      _gaq.push(['_setDomainName', window.location.host]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();

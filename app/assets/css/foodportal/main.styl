@@ -1,0 +1,97 @@
+@import 'nib'
+
+lightergray = #f7f7f7
+lightgray = #eee
+gray = #ddd
+grayer = #aaa
+darkgray = #666
+darkergray = #333
+orange = #FF4500
+
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+  -webkit-font-smoothing: antialiased
+
+html, body
+  height: 100%
+
+body
+  font-family: 'pt-serif', serif
+  font-size: 62.5%
+  -webkit-font-smoothing: antialiased
+  background: white
+
+a
+  color: orange
+  text-decoration: none
+  &:hover
+    border-bottom: 1px solid orange
+
+img
+  display: block
+
+#container
+  max-width: 1000px
+  padding: 0 20px
+  margin: 0 auto
+
+  header
+    padding-top: 40px
+    margin-bottom: 50px
+    h1
+      width: 200px
+      height: 152px
+      background: url('/img/foodportal/logo.png')
+      text-indent: -9999px
+      margin: 0 auto
+
+  nav.main
+    clearfix()
+    width: 960px
+    margin: 0 auto
+    background: orange
+    height: 40px
+    a
+      display: block
+      float: left
+      color: white
+      line-height: 40px
+      font-size: 16px
+      text-transform: uppercase
+      padding: 0 20px
+      &:hover
+        border-bottom: 0
+        background: black
+      &.active
+        background: darkergray
+        pointer-events: none
+
+  #content
+    font-size: 16px
+
+    nav.submenu
+      clearfix()
+      background: darkergray
+      height: 30px
+      a
+        display: block
+        float: left
+        color: white
+        font-size: 14px
+        line-height: 30px
+        padding: 0 15px
+        &:hover
+          border-bottom: 0
+          background: black
+        &.active
+          background: darkgray
+          pointer-events: none
+
+  footer
+    padding-bottom: 100px
+    margin-top: 100px
+    text-align: center
+    font-size: 16px
+    color: grayer

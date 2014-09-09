@@ -67,6 +67,12 @@ app.get '/experiments', (req, res) ->
 app.get '/klout.be', (req, res) ->
   res.render 'klout'
 
+app.get '/foodportal', (req, res) ->
+  res.render 'foodportal/layout'
+
+app.get '/foodportal/partials/:name', (req, res) ->
+    res.render 'foodportal/partials/' + req.params.name
+
 # API
 
 app.get '/api/posts', (req, res) ->
