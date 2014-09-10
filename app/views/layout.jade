@@ -1,3 +1,5 @@
+- nav = [ { name: 'Home', href: '/' }, { name: 'About', href: '/about' }, { name: 'Blog', href: 'http://www.vinch.be/blog' }, { name: 'Experiments', href: '/experiments' } ]
+
 !!! 5
 //if lt IE 7
   html.no-js.lt-ie10.lt-ie9.lt-ie8.lt-ie7(lang='en')
@@ -23,14 +25,22 @@ html.no-js(lang='en')
   
   body
 
-    #container
-
       header
         h1: a(href='/') Hello, I’m <strong>Vinch</strong>
         .subtitle And this is my website.
 
-      #content
-        block body
+      nav
+        .inner
+          each val in nav
+            if currentPath === val.href
+              a.active(href= val.href)= val.name
+            else
+              a(href= val.href)= val.name
+
+
+      #container
+        #content
+          block body
 
       footer &copy #{new Date().getFullYear()} Vincent Battaglia
 

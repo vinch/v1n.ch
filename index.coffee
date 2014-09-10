@@ -43,6 +43,10 @@ logRequest = (req, res, next) ->
   log.info req.method + ' ' + req.url
   next()
 
+setLocals = (req, res, next) ->
+  app.locals.currentPath = req.path
+  next()
+
 redirectWWW = (req, res, next) ->
   if req.headers.host.match(/^www/) isnt null
     res.redirect 301, 'http://' + req.headers.host.replace(/^www\./, '') + req.url
@@ -52,7 +56,7 @@ redirectWWW = (req, res, next) ->
 
 # routes
 
-app.all '*', redirectWWW, logRequest, (req, res, next) ->
+app.all '*', redirectWWW, setLocals, logRequest, (req, res, next) ->
   next()
 
 app.get '/', (req, res) ->
