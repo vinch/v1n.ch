@@ -21,36 +21,41 @@ html.no-js(lang='en')
     block meta
     block stylesheets
     link(href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
-    script(type='text/javascript', src='//use.typekit.net/pek2yuw.js')
-    script(type='text/javascript') try{Typekit.load();}catch(e){}
+    script(src='//use.typekit.net/pek2yuw.js')
+    script try{Typekit.load();}catch(e){}
   
   body
 
-      header
-        h1: a(href='/') Hello, I’m <strong>Vinch</strong>
-        .subtitle And this is my website.
+    header
+      h1: a(href='/') Hello, I’m <strong>Vinch</strong>
+      .subtitle And this is my website.
 
-      nav
-        .inner
-          each val in nav
-            if currentPath === val.href
-              a.active(href= val.href)
-                i.fa(class= val.icon)
-                span= val.name
-            else
-              a(href= val.href)
-                i.fa(class= val.icon)
-                span= val.name
-          a(href='#').search.fa.fa-search
+    nav
+      .inner
+        each val in nav
+          if currentPath === val.href
+            a.active(href= val.href)
+              i.fa(class= val.icon)
+              span= val.name
+          else
+            a(href= val.href)
+              i.fa(class= val.icon)
+              span= val.name
+        a(href='#').search.fa.fa-search
 
 
-      #container
-        #content
-          block body
+    #container
+      #content
+        block body
 
-      footer &copy #{new Date().getFullYear()} Vincent Battaglia
+    footer &copy #{new Date().getFullYear()} Vincent Battaglia
+
+    #search
+      form(method='get', action='http://www.vinch.be/blog')
+        input(type='text', name='s', autocomplete='off')
 
     script(src='/js/dist/vinch.min.js')
+    != js('vinch')
     block javascripts
     script.
       var _gaq = _gaq || [];

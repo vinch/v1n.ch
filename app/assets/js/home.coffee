@@ -1,5 +1,3 @@
-window.App = {}
-
 App.Posts = {
   get: (data, callback) ->
     $.ajax {
