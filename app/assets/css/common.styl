@@ -83,6 +83,11 @@ nav
         color: darkergray
         background: white
         pointer-events: none
+      i
+        font-size: 25px
+        height: 47px
+        display: none
+        line-height: 47px
 
 footer
   padding-bottom: 100px
@@ -110,9 +115,15 @@ footer
         background-color: lightblue
 
 @media (max-width: 500px)
-  #container
-    header
-      padding-top: 50px
-    footer
-      padding-bottom: 50px
-      margin-top: 50px
+  header
+    padding-top: 50px
+  nav
+    .inner
+      a
+        i
+          display: block
+        span
+          display: none
+  footer
+    padding-bottom: 50px
+    margin-top: 50px
