@@ -96,9 +96,32 @@ nav
 footer
   padding-bottom: 100px
   margin-top: 100px
-  text-align: center
-  font-size: 16px
-  color: grayer
+  #social
+    clearfix()
+    width: 175px
+    margin: 0 auto 20px
+    a
+      display: block
+      float: left
+      width: 40px
+      height: 40px
+      background: gray
+      font-size: 20px
+      line-height: 40px
+      text-align: center
+      color: darkgray
+      border-radius: 20px
+      margin-right: 5px
+      &:hover
+        background: darkgray
+        color: white
+      &:last-child
+        margin: 0
+  #copyright
+    display: block
+    text-align: center
+    font-size: 16px
+    color: grayer
 
 #content
   section
