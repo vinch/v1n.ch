@@ -75,7 +75,10 @@ app.get '/foodportal', (req, res) ->
   res.render 'foodportal/layout'
 
 app.get '/foodportal/partials/:name', (req, res) ->
-    res.render 'foodportal/partials/' + req.params.name
+  res.render 'foodportal/partials/' + req.params.name
+
+app.get '/blog', (req, res) ->
+  res.redirect 'http://www.vinch.be/blog'
 
 # API
 
