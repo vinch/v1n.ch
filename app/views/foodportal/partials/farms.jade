@@ -1,4 +1,29 @@
 h2 FARMS
+a(ng-click='toggleForm()') + Add
+form(ng-show='isVisibleForm', ng-submit='submitForm()')
+  .line
+    label(for='farm-name') Name
+    input#farm-name(type='text', name='name')
+  .line
+    label(for='farm-description') Description
+    input#farm-description(type='text', name='description')
+  .line
+    label(for='farm-category') Category
+    input#farm-category(type='text', name='category')
+  .line
+    label(for='farm-address') Address
+    input#farm-address(type='text', name='address')
+  .line
+    label(for='farm-city') City
+    input#farm-city(type='text', name='city')
+  .line
+    label(for='farm-zipcode') Zip Code
+    input#farm-zipcode(type='text', name='zipcode')
+  .line
+    label(for='farm-country') Country
+    input#farm-country(type='text', name='country')
+  .line
+    button Submit
 ul
   li(ng-repeat='farm in farms')
     h3 {{ farm.name }}
