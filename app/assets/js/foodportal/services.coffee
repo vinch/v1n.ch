@@ -1,35 +1,87 @@
 foodPortalServices = angular.module 'foodPortalServices', []
 
-foodPortalServices.constant 'apiEndpoint', 'https://api.parse.com/1'
-
-foodPortalServices.factory 'farmService', (requestService, apiEndpoint) ->
+foodPortalServices.factory 'placeCategoryService', (requestService) ->
   return {
     getAll: ->
-      return requestService.get apiEndpoint + '/classes/Farm'
+      data = {
+        order: 'name'
+      }
+      return requestService.get 'https://api.parse.com/1/classes/PlaceCategory', data, { 'X-Parse-Application-Id': 'MaouOA5zAXZiXWP7Xz4b5fNr6foJQfFwbm9KmWkt', 'X-Parse-REST-API-Key': 'QMqU5f7l0XdDbXqpA31zM5wabr5t4TGORDIE6YhB' }
+  }
+
+foodPortalServices.factory 'placeService', (requestService) ->
+  return {
+    getAll: (position) ->
+      data = {
+        include: 'category'
+        where: JSON.stringify {
+          position: {
+            '$nearSphere': {
+              __type: 'GeoPoint'
+              latitude: position.latitude
+              longitude: position.longitude
+            }
+          }
+        }
+      }
+      return requestService.get 'https://api.parse.com/1/classes/Place', data, { 'X-Parse-Application-Id': 'MaouOA5zAXZiXWP7Xz4b5fNr6foJQfFwbm9KmWkt', 'X-Parse-REST-API-Key': 'QMqU5f7l0XdDbXqpA31zM5wabr5t4TGORDIE6YhB' }
+    create: (data) ->
+      return requestService.post 'https://api.parse.com/1/classes/Place', data, { 'X-Parse-Application-Id': 'MaouOA5zAXZiXWP7Xz4b5fNr6foJQfFwbm9KmWkt', 'X-Parse-REST-API-Key': 'QMqU5f7l0XdDbXqpA31zM5wabr5t4TGORDIE6YhB' }
+  }
+
+foodPortalServices.factory 'utilsService', ->
+  return {
+    distance: (lat1, lon1, lat2, lon2) ->
+      R = 3961 # Earth radius in miles
+      dLat = @deg2rad(lat2-lat1)
+      dLon = @deg2rad(lon2-lon1) 
+      a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(@deg2rad(lat1)) * Math.cos(@deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2)
+      c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)) 
+      d = R * c
+      return d
+    deg2rad: (deg) ->
+      return deg * (Math.PI/180)
+  }
+
+foodPortalServices.factory 'geolocationService', ($q, $window, $rootScope) ->
+  return ->
+    deferred = $q.defer()
+    unless 'geolocation' of $window.navigator
+      deferred.reject 'Geolocation is not supported'
+    else
+      $window.navigator.geolocation.getCurrentPosition ((position) ->
+        $rootScope.$apply ->
+          deferred.resolve position
+      ), (err) ->
+        deferred.reject err.message
+
+    return deferred.promise
+
+foodPortalServices.factory 'mapsService', (requestService) ->
+  return {
+    geocode: (address) ->
+      return requestService.get 'https://maps.googleapis.com/maps/api/geocode/json', { address: address, key: 'AIzaSyDv8vJ4PHMEItOe3zeMoeVEU21RSL1oSBo' }
   }
 
 foodPortalServices.factory 'requestService', ($http, $q) ->  
   return {
-    get: (url, params) ->
-      @http 'GET', url, params
+    get: (url, params, headers) ->
+      @http 'GET', url, params, headers
 
-    post: (url, data) ->
-      @http 'POST', url, data
+    post: (url, data, headers) ->
+      @http 'POST', url, data, headers
 
-    put: (url, data) ->
-      @http 'PUT', url, data
+    put: (url, data, headers) ->
+      @http 'PUT', url, data, headers
 
-    delete: (url) ->
-      @http 'DELETE', url
+    delete: (url, headers) ->
+      @http 'DELETE', url, headers
 
-    http: (method, url, data) ->
+    http: (method, url, data, headers) ->
       config = {
         method: method
         url: url
-        headers: {
-          'X-Parse-Application-Id': 'MaouOA5zAXZiXWP7Xz4b5fNr6foJQfFwbm9KmWkt'
-          'X-Parse-REST-API-Key': 'QMqU5f7l0XdDbXqpA31zM5wabr5t4TGORDIE6YhB'
-        }
+        headers: headers
       }
 
       if data

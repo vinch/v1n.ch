@@ -1,8 +1,64 @@
-nav.submenu
-  a(ui-sref='places.farms', ui-sref-active='active') FARMS
-  a(ui-sref='places.stores', ui-sref-active='active') STORES
-  a(ui-sref='places.restaurants', ui-sref-active='active') RESTAURANTS
-  a(ui-sref='places.wineries', ui-sref-active='active') WINERIES
-  a(ui-sref='places.breweries', ui-sref-active='active') BREWERIES
+h2 Places
 
-#place-container(ui-view='')
+a(ng-click='toggleForm()').add {{isVisibleForm ? '–' : '+'}}
+
+form(novalidate, name='addPlaceForm', ng-show='isVisibleForm', ng-submit='submitForm()', ng-class='{saving: saving}')
+  .line
+    label(for='place-name') Name
+    input#place-name(type='text', name='name', ng-model='place.name', required)
+    ul.error-list(ng-show='addPlaceForm.name.$invalid && addPlaceForm.name.$dirty')
+      li This field is required
+  .line
+    label(for='place-description') Description
+    input#place-description(type='text', name='description', ng-model='place.description')
+  .line
+    label(for='place-category') Category
+    select#place-category(name='category', ng-model='place.category', required)
+      option(ng-repeat='category in categories', value='{{ category }}') {{ category.name }}
+    ul.error-list(ng-show='addPlaceForm.category.$invalid && addPlaceForm.category.$dirty')
+      li This field is required
+  .line
+    label(for='place-address') Address
+    input#place-address(type='text', name='address', ng-model='place.address')
+  .line
+    label(for='place-city') City
+    input#place-city(type='text', name='city', ng-model='place.city', required)
+    ul.error-list(ng-show='addPlaceForm.city.$invalid && addPlaceForm.city.$dirty')
+      li This field is required
+  .line
+    label(for='place-zipcode') Zip Code
+    input.small#place-zipcode(type='text', name='zipcode', ng-model='place.zipcode', required)
+    ul.error-list(ng-show='addPlaceForm.zipcode.$invalid && addPlaceForm.zipcode.$dirty')
+      li This field is required
+  .line
+    label(for='place-country') Country
+    select#place-country(name='country', ng-model='place.country', required)
+      option(value='US') United States
+    ul.error-list(ng-show='addPlaceForm.country.$invalid && addPlaceForm.country.$dirty')
+      li This field is required
+  .line
+    label(for='place-website') Website
+    input#place-website(type='text', name='website', ng-model='place.website')
+  .line
+    button(ng-disabled='addPlaceForm.$invalid', ng-class='{disabled: addPlaceForm.$invalid}') Submit
+
+.position.info(ng-hide='position')
+  p(ng-hide='error') Retrieving your location...
+  p.error(ng-show='error') Please share your location in order to access the data.
+
+.loading.info(ng-show='position && !places')
+  p Loading data...
+
+.noresults.info(ng-show='places.length == 0')
+  p No results.
+
+ul.list
+  li(ng-repeat='place in places', ng-click='toggleVisiblePlace(place.objectId)')
+    h3 {{ place.name }}
+    h4 {{ place.category.name }}
+    p.distance {{ place.distance | prettyDistance }}
+    .content(ng-show='visiblePlaces.indexOf(place.objectId) != -1')
+      p.description(ng-show='place.description') {{ place.description }}
+      address: a(href='http://maps.google.com/?q={{ place.formatted_address }}', target='_blank') {{ place.formatted_address }}
+      .links
+        a.website(href='{{ place.website }}', target='_blank') {{ place.website }}

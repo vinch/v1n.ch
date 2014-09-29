@@ -32,6 +32,12 @@ a
 img
   display: block
 
+input, select, button
+  font-family: 'pt-serif', serif
+
+select
+  -webkit-appearance: none
+
 #container
   max-width: 1000px
   padding: 0 20px
@@ -70,24 +76,158 @@ img
 
   #content
     font-size: 16px
+    position: relative
 
-    nav.submenu
-      clearfix()
-      background: darkergray
-      height: 30px
-      a
-        display: block
-        float: left
-        color: white
-        font-size: 14px
-        line-height: 30px
-        padding: 0 15px
+    h2
+      font-size: 30px
+      line-height: 1em
+      padding: 20px 0
+      border-bottom: 1px solid gray
+
+    a.add
+      display: block
+      position: absolute
+      top: 0
+      right: 0
+      cursor: pointer
+      font-size: 40px
+      line-height: 70px
+      font-weight: bold
+      background: lightergray
+      width: 70px
+      height: 70px
+      text-align: center
+      font-family: serif
+      border-left: 1px solid gray
+      border-right: 1px solid gray
+      &:hover
+        background: lightgray
+        color: black
+        border-bottom: 0
+
+    .info
+      padding-top: 20px
+      font-size: 20px
+
+    form
+      background: lightergray
+      padding: 20px
+      border: 1px solid gray
+      border-top: 0
+      &.saving
+        pointer-events: none
+        opacity: 0.5
+      .line
+        clearfix()
+        margin-bottom: 10px
+        &:last-child
+          margin: 0
+        label
+          display: block
+          float: left
+          width: 150px
+          line-height: 30px
+          font-size: 16px
+        input, select
+          display: block
+          float: left
+          width: 300px
+          height: 30px
+          border: 1px solid gray
+          outline: none
+          padding: 0 5px
+          font-size: 16px
+        input
+          &:focus
+            border-color: grayer
+          &.ng-invalid.ng-dirty
+            border-color: orange
+          &.small
+            width: 100px
+        select
+          border-radius: 0
+          background: white url('/img/foodportal/arrow-select.png') right no-repeat
+          &:focus
+            border-color: grayer
+          &.ng-invalid.ng-dirty
+            border-color: orange
+        ul.error-list
+          clear: both
+          list-style: none
+          padding: 5px 0 0 150px
+          li
+            font-size: 16px
+            line-height: 1.4em
+            color: orange
+        button
+          display: block
+          height: 40px
+          line-height: 40px
+          background: orange
+          color: white
+          border: 0
+          cursor: pointer
+          font-size: 16px
+          padding: 0 15px
+          text-transform: uppercase
+          &:hover
+            background: black
+          &.disabled
+            pointer-events: none
+            background: grayer
+            opacity: 0.5
+
+    .list
+      list-style: none
+      padding-top: 20px
+      li
+        font-size: 16px
+        padding: 20px
+        margin-bottom: 10px
+        background: lightergray
+        cursor: pointer
+        border: 1px solid gray
+        position: relative
         &:hover
-          border-bottom: 0
-          background: black
-        &.active
-          background: darkgray
-          pointer-events: none
+          background: lightgray
+        h3
+          font-size: 20px
+          line-height: 1em
+          margin-bottom: 5px
+        h4
+          font-size: 14px
+          line-height: 1em
+          text-transform: uppercase
+          font-weight: normal
+          color: darkgray
+        .distance
+          position: absolute
+          top: 20px
+          right: 20px
+          color: darkgray
+        .content
+          margin-top: 20px
+          border-top: 1px dashed gray
+          padding-top: 10px
+          .description
+            margin-top: 10px
+            line-height: 1.4em
+          address
+            font-style: normal
+            line-height: 1em
+            margin-top: 10px
+            a
+              color: darkgray
+              &:hover
+                color: black
+                border: 0
+          .links
+            margin-top: 10px
+            a
+              line-height: 1em
+              margin-bottom: 5px
+              &:last-child
+                margin: 0
 
   footer
     padding-bottom: 100px
