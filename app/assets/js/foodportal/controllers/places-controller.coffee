@@ -1,4 +1,4 @@
-angular.module('foodPortalControllers').controller 'PlacesController', ($scope, geolocationService, utilsService, placeService, placeCategoryService, mapsService) ->
+angular.module('foodPortalControllers').controller 'PlacesController', ($scope, geolocationService, yelpService, utilsService, placeService, placeCategoryService, mapsService) ->
   
   $scope.isVisibleForm = false
   $scope.visiblePlaces = []
@@ -18,6 +18,53 @@ angular.module('foodPortalControllers').controller 'PlacesController', ($scope, 
   
   $scope.toggleForm = ->
     $scope.isVisibleForm = !$scope.isVisibleForm
+
+  $scope.submitYelpForm = ->
+    if $scope.place.url.indexOf('http://www.yelp.com/biz/') == 0
+      slug = $scope.place.url.substring(24)
+      yelpService.getBusiness(slug).then (data) ->
+        place = {
+          name: data.name
+          category: {
+            __type: 'Pointer'
+            className: 'PlaceCategory'
+            objectId: 'lhWptQxBuD'
+          }
+          address: data.location.address[0]
+          city: data.location.city
+          zipcode: data.location.postal_code
+          country: data.location.country_code
+          website: data.url
+        }
+        mapsService.geocode(data.location.address[0] + ', ' + data.location.postal_code + ' ' + data.location.city + ', ' + data.location.country_code).then (data) ->
+          if data.status == 'OK'
+            latitude = data.results[0].geometry.location.lat
+            longitude = data.results[0].geometry.location.lng
+            place.position = {
+              __type: 'GeoPoint'
+              latitude: latitude
+              longitude: longitude
+            }
+            place.formatted_address = data.results[0].formatted_address
+
+            $scope.saving = true
+
+            placeService.create(place).then ((data) ->
+              $scope.saving = false
+              $scope.isVisibleForm = false
+              $scope.addPlaceYelpForm.$setPristine(true)
+              place.objectId = data.objectId
+              place.distance = utilsService.distance($scope.position.coords.latitude, $scope.position.coords.longitude, latitude, longitude)
+              place.category.name = 'Others'
+              $scope.places.unshift place
+              $scope.place = {}
+            ), (err) ->
+              $scope.saving = false
+              alert('We couldn\'t save the data in the database.')
+          else
+            alert('We couldn\'t locate the address you provided.')
+    else
+      alert('This URL is not a valid Yelp URL.')
 
   $scope.submitForm = ->
     mapsService.geocode($scope.place.address + ', ' + $scope.place.zipcode + ' ' + $scope.place.city + ', ' + $scope.place.country).then (data) ->
@@ -48,7 +95,7 @@ angular.module('foodPortalControllers').controller 'PlacesController', ($scope, 
           $scope.place.objectId = data.objectId
           $scope.place.distance = utilsService.distance($scope.position.coords.latitude, $scope.position.coords.longitude, latitude, longitude)
           $scope.place.category.name = category.name
-          $scope.places.push $scope.place
+          $scope.places.unshift $scope.place
           $scope.place = {}
         ), (err) ->
           $scope.saving = false

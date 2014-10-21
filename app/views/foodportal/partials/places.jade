@@ -2,45 +2,54 @@ h2 Places
 
 a(ng-click='toggleForm()').add {{isVisibleForm ? '–' : '+'}}
 
-form(novalidate, name='addPlaceForm', ng-show='isVisibleForm', ng-submit='submitForm()', ng-class='{saving: saving}')
-  .line
-    label(for='place-name') Name
-    input#place-name(type='text', name='name', ng-model='place.name', required)
-    ul.error-list(ng-show='addPlaceForm.name.$invalid && addPlaceForm.name.$dirty')
-      li This field is required
-  .line
-    label(for='place-description') Description
-    input#place-description(type='text', name='description', ng-model='place.description')
-  .line
-    label(for='place-category') Category
-    select#place-category(name='category', ng-model='place.category', required)
-      option(ng-repeat='category in categories', value='{{ category }}') {{ category.name }}
-    ul.error-list(ng-show='addPlaceForm.category.$invalid && addPlaceForm.category.$dirty')
-      li This field is required
-  .line
-    label(for='place-address') Address
-    input#place-address(type='text', name='address', ng-model='place.address')
-  .line
-    label(for='place-city') City
-    input#place-city(type='text', name='city', ng-model='place.city', required)
-    ul.error-list(ng-show='addPlaceForm.city.$invalid && addPlaceForm.city.$dirty')
-      li This field is required
-  .line
-    label(for='place-zipcode') Zip Code
-    input.small#place-zipcode(type='text', name='zipcode', ng-model='place.zipcode', required)
-    ul.error-list(ng-show='addPlaceForm.zipcode.$invalid && addPlaceForm.zipcode.$dirty')
-      li This field is required
-  .line
-    label(for='place-country') Country
-    select#place-country(name='country', ng-model='place.country', required)
-      option(value='US') United States
-    ul.error-list(ng-show='addPlaceForm.country.$invalid && addPlaceForm.country.$dirty')
-      li This field is required
-  .line
-    label(for='place-website') Website
-    input#place-website(type='text', name='website', ng-model='place.website')
-  .line
-    button(ng-disabled='addPlaceForm.$invalid', ng-class='{disabled: addPlaceForm.$invalid}') Submit
+.form_container(ng-show='isVisibleForm', ng-class='{saving: saving}')
+  form(novalidate, name='addPlaceYelpForm', ng-submit='submitYelpForm()')
+    .line
+      label(for='place-url') URL*
+      input#place-url(type='text', name='url', ng-model='place.url', required)
+      ul.error-list(ng-show='addPlaceYelpForm.url.$invalid && addPlaceYelpForm.url.$dirty')
+        li This field is required
+    .line
+      button(ng-disabled='addPlaceYelpForm.$invalid', ng-class='{disabled: addPlaceYelpForm.$invalid}') Submit
+  form(novalidate, name='addPlaceForm', ng-submit='submitForm()')
+    .line
+      label(for='place-name') Name*
+      input#place-name(type='text', name='name', ng-model='place.name', required)
+      ul.error-list(ng-show='addPlaceForm.name.$invalid && addPlaceForm.name.$dirty')
+        li This field is required
+    .line
+      label(for='place-description') Description
+      input#place-description(type='text', name='description', ng-model='place.description')
+    .line
+      label(for='place-category') Category*
+      select#place-category(name='category', ng-model='place.category', required)
+        option(ng-repeat='category in categories', value='{{ category }}') {{ category.name }}
+      ul.error-list(ng-show='addPlaceForm.category.$invalid && addPlaceForm.category.$dirty')
+        li This field is required
+    .line
+      label(for='place-address') Address
+      input#place-address(type='text', name='address', ng-model='place.address')
+    .line
+      label(for='place-city') City*
+      input#place-city(type='text', name='city', ng-model='place.city', required)
+      ul.error-list(ng-show='addPlaceForm.city.$invalid && addPlaceForm.city.$dirty')
+        li This field is required
+    .line
+      label(for='place-zipcode') Zip Code*
+      input.small#place-zipcode(type='text', name='zipcode', ng-model='place.zipcode', required)
+      ul.error-list(ng-show='addPlaceForm.zipcode.$invalid && addPlaceForm.zipcode.$dirty')
+        li This field is required
+    .line
+      label(for='place-country') Country*
+      select#place-country(name='country', ng-model='place.country', required)
+        option(value='US') United States
+      ul.error-list(ng-show='addPlaceForm.country.$invalid && addPlaceForm.country.$dirty')
+        li This field is required
+    .line
+      label(for='place-website') Website
+      input#place-website(type='text', name='website', ng-model='place.website')
+    .line
+      button(ng-disabled='addPlaceForm.$invalid', ng-class='{disabled: addPlaceForm.$invalid}') Submit
 
 .position.info(ng-hide='position')
   p(ng-hide='error') Retrieving your location...

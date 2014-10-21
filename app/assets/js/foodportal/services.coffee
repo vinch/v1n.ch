@@ -29,6 +29,21 @@ foodPortalServices.factory 'placeService', (requestService) ->
       return requestService.post 'https://api.parse.com/1/classes/Place', data, { 'X-Parse-Application-Id': 'MaouOA5zAXZiXWP7Xz4b5fNr6foJQfFwbm9KmWkt', 'X-Parse-REST-API-Key': 'QMqU5f7l0XdDbXqpA31zM5wabr5t4TGORDIE6YhB' }
   }
 
+foodPortalServices.factory 'yelpService', (requestService) ->
+  return {
+    getBusiness: (slug) ->
+      parameters = {
+        oauth_consumer_key : 'HJiPNkgKG7FKpygGzZ01Lg'
+        oauth_nonce : '1234567890'
+        oauth_timestamp : '1412051546589'
+        oauth_token : 'zx-u71I2k7hSZ5CgOay5UBO3OTGt6IUr'
+        oauth_signature_method : 'HMAC-SHA1'
+        oauth_version: '1.0'
+      }
+      signature = oauthSignature.generate('get', 'http://api.yelp.com/v2/business/' + slug, parameters, 'FuwJgbO9O83Jf0YEVw2gwIbEqgA', 'ZmhMnwHyhW2LStD3WCwn1OS4Rpo')
+      return requestService.get '/proxy?url=' + encodeURIComponent('http://api.yelp.com/v2/business/' + slug + '?oauth_consumer_key=HJiPNkgKG7FKpygGzZ01Lg&oauth_nonce=1234567890&oauth_timestamp=1412051546589&oauth_token=zx-u71I2k7hSZ5CgOay5UBO3OTGt6IUr&oauth_signature_method=HMAC-SHA1&oauth_version=1.0&oauth_signature=' + signature)
+  }
+
 foodPortalServices.factory 'utilsService', ->
   return {
     distance: (lat1, lon1, lat2, lon2) ->

@@ -47,16 +47,9 @@ setLocals = (req, res, next) ->
   app.locals.currentPath = req.path
   next()
 
-redirectWWW = (req, res, next) ->
-  if req.headers.host.match(/^www/) isnt null
-    res.redirect 301, 'http://' + req.headers.host.replace(/^www\./, '') + req.url
-  else
-    next()
-
-
 # routes
 
-app.all '*', redirectWWW, setLocals, logRequest, (req, res, next) ->
+app.all '*', setLocals, logRequest, (req, res, next) ->
   next()
 
 app.get '/', (req, res) ->
@@ -118,6 +111,16 @@ app.get '/api/photos', (req, res) ->
         link: item.link
       }
     res.send photos
+  )
+
+# proxy
+
+app.get '/proxy', (req, res) ->
+  url = req.query.url
+  request.get(url, {
+    json: true
+  }, (error, response, body) ->
+    res.send body
   )
 
 # 404

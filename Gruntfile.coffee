@@ -16,6 +16,7 @@ module.exports = (grunt) ->
         src: [
           'bower_components/angular/angular.js'
           'bower_components/ui-router/release/angular-ui-router.js'
+          'bower_components/oauth-signature/dist/oauth-signature.js'
         ]
         dest: 'public/js/dist/foodportal.js'
       }
