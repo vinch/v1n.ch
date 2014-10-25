@@ -6,8 +6,14 @@ a(ng-click='toggleForm()').add {{isVisibleForm ? '–' : '+'}}
   form(novalidate, name='addPlaceYelpForm', ng-submit='submitYelpForm()')
     .line
       label(for='place-url') URL*
-      input#place-url(type='text', name='url', ng-model='place.url', required)
+      input#place-url(type='text', name='url', ng-model='place.yelp.url', required)
       ul.error-list(ng-show='addPlaceYelpForm.url.$invalid && addPlaceYelpForm.url.$dirty')
+        li This field is required
+    .line
+      label(for='place-category') Category*
+      select#place-category(name='category', ng-model='place.yelp.category', required)
+        option(ng-repeat='category in categories', value='{{ category }}') {{ category.name }}
+      ul.error-list(ng-show='addPlaceYelpForm.category.$invalid && addPlaceYelpForm.category.$dirty')
         li This field is required
     .line
       button(ng-disabled='addPlaceYelpForm.$invalid', ng-class='{disabled: addPlaceYelpForm.$invalid}') Submit
@@ -63,11 +69,20 @@ a(ng-click='toggleForm()').add {{isVisibleForm ? '–' : '+'}}
 
 ul.list
   li(ng-repeat='place in places', ng-click='toggleVisiblePlace(place.objectId)')
-    h3 {{ place.name }}
-    h4 {{ place.category.name }}
+    .icon.fa.fa-birthday-cake(ng-show='place.category.name == "Bakery"')
+    .icon.fa.fa-beer(ng-show='place.category.name == "Brewery"')
+    .icon.fa.fa-coffee(ng-show='place.category.name == "Coffee & Tea"')
+    .icon.fa.fa-tree(ng-show='place.category.name == "Farm"')
+    .icon.fa.fa-cutlery(ng-show='place.category.name == "Restaurant"')
+    .icon.fa.fa-shopping-cart(ng-show='place.category.name == "Store"')
+    .icon.fa.fa-glass(ng-show='place.category.name == "Winery"')
+    .name_address
+      h3 {{ place.name }}
+      address: a(href='http://maps.google.com/?q={{ place.formatted_address }}', target='_blank') {{ place.formatted_address }}
     p.distance {{ place.distance | prettyDistance }}
     .content(ng-show='visiblePlaces.indexOf(place.objectId) != -1')
       p.description(ng-show='place.description') {{ place.description }}
-      address: a(href='http://maps.google.com/?q={{ place.formatted_address }}', target='_blank') {{ place.formatted_address }}
       .links
         a.website(href='{{ place.website }}', target='_blank') {{ place.website }}
+
+#background(ng-show='isVisibleForm', ng-click='hideForm()')

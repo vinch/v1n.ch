@@ -19,10 +19,11 @@ html.no-js(lang='en', ng-app='foodPortalApp')
     meta(name='description', content='Places, Articles, Books, Recipes and Brands curated by Sandra Cabrera de Diego and Vincent Battaglia')
     meta(property='og:image', content='http://v1n.ch/img/foodportal/thumbnail.png')
     != css('foodportal/main')
+    link(href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
     script(type='text/javascript', src='//use.typekit.net/pek2yuw.js')
     script(type='text/javascript') try{Typekit.load();}catch(e){}
   
-  body
+  body(ng-controller='MainController')
 
     #container
 
@@ -43,6 +44,7 @@ html.no-js(lang='en', ng-app='foodPortalApp')
     script(src='/js/dist/foodportal.min.js')
     != js('foodportal/app')
     != js('foodportal/controllers')
+    != js('foodportal/controllers/main-controller')
     != js('foodportal/controllers/articles-controller')
     != js('foodportal/controllers/books-controller')
     != js('foodportal/controllers/places-controller')

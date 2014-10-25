@@ -16,19 +16,23 @@ angular.module('foodPortalControllers').controller 'PlacesController', ($scope, 
   ), (err) ->
     $scope.error = true
   
+  $scope.hideForm = ->
+    $scope.isVisibleForm = false
+
   $scope.toggleForm = ->
     $scope.isVisibleForm = !$scope.isVisibleForm
 
   $scope.submitYelpForm = ->
-    if $scope.place.url.indexOf('http://www.yelp.com/biz/') == 0
-      slug = $scope.place.url.substring(24)
+    if $scope.place.yelp.url.indexOf('http://www.yelp.com/biz/') == 0
+      slug = $scope.place.yelp.url.substring(24)
+      category = JSON.parse($scope.place.yelp.category)
       yelpService.getBusiness(slug).then (data) ->
         place = {
           name: data.name
           category: {
             __type: 'Pointer'
             className: 'PlaceCategory'
-            objectId: 'lhWptQxBuD'
+            objectId: category.objectId
           }
           address: data.location.address[0]
           city: data.location.city
@@ -51,11 +55,11 @@ angular.module('foodPortalControllers').controller 'PlacesController', ($scope, 
 
             placeService.create(place).then ((data) ->
               $scope.saving = false
-              $scope.isVisibleForm = false
+              $scope.hideForm()
               $scope.addPlaceYelpForm.$setPristine(true)
               place.objectId = data.objectId
               place.distance = utilsService.distance($scope.position.coords.latitude, $scope.position.coords.longitude, latitude, longitude)
-              place.category.name = 'Others'
+              place.category.name = category.name
               $scope.places.unshift place
               $scope.place = {}
             ), (err) ->
@@ -90,7 +94,7 @@ angular.module('foodPortalControllers').controller 'PlacesController', ($scope, 
 
         placeService.create($scope.place).then ((data) ->
           $scope.saving = false
-          $scope.isVisibleForm = false
+          $scope.hideForm()
           $scope.addPlaceForm.$setPristine(true)
           $scope.place.objectId = data.objectId
           $scope.place.distance = utilsService.distance($scope.position.coords.latitude, $scope.position.coords.longitude, latitude, longitude)

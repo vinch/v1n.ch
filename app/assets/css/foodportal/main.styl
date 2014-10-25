@@ -89,6 +89,7 @@ select
       position: absolute
       top: 0
       right: 0
+      z-index: 100
       cursor: pointer
       font-size: 40px
       line-height: 70px
@@ -109,73 +110,80 @@ select
       padding-top: 20px
       font-size: 20px
 
-    form
-      background: lightergray
-      padding: 20px
-      border: 1px solid gray
-      border-top: 0
-      &.saving
-        pointer-events: none
-        opacity: 0.5
-      .line
-        clearfix()
-        margin-bottom: 10px
-        &:last-child
-          margin: 0
-        label
-          display: block
-          float: left
-          width: 150px
-          line-height: 30px
-          font-size: 16px
-        input, select
-          display: block
-          float: left
-          width: 300px
-          height: 30px
-          border: 1px solid gray
-          outline: none
-          padding: 0 5px
-          font-size: 16px
-        input
-          &:focus
-            border-color: grayer
-          &.ng-invalid.ng-dirty
-            border-color: orange
-          &.small
-            width: 100px
-        select
-          border-radius: 0
-          background: white url('/img/foodportal/arrow-select.png') right no-repeat
-          &:focus
-            border-color: grayer
-          &.ng-invalid.ng-dirty
-            border-color: orange
-        ul.error-list
-          clear: both
-          list-style: none
-          padding: 5px 0 0 150px
-          li
+    .form_container
+      width: 492px
+      position: absolute
+      right: 0
+      top: 70px
+      z-index: 100
+      border-top: 1px solid gray
+      form
+        background: lightergray
+        padding: 20px
+        border: 1px solid gray
+        border-top: 0
+        &.saving
+          pointer-events: none
+          opacity: 0.5
+        .line
+          clearfix()
+          margin-bottom: 10px
+          &:last-child
+            margin: 0
+          label
+            display: block
+            float: left
+            width: 150px
+            line-height: 30px
             font-size: 16px
-            line-height: 1.4em
-            color: orange
-        button
-          display: block
-          height: 40px
-          line-height: 40px
-          background: orange
-          color: white
-          border: 0
-          cursor: pointer
-          font-size: 16px
-          padding: 0 15px
-          text-transform: uppercase
-          &:hover
-            background: black
-          &.disabled
-            pointer-events: none
-            background: grayer
-            opacity: 0.5
+          input, select
+            display: block
+            float: left
+            width: 300px
+            height: 30px
+            border: 1px solid gray
+            outline: none
+            padding: 0 5px
+            font-size: 16px
+          input
+            &:focus
+              border-color: grayer
+            &.ng-invalid.ng-dirty
+              border-color: orange
+            &.small
+              width: 100px
+          select
+            border-radius: 0
+            background: white url('/img/foodportal/arrow-select.png') right no-repeat
+            &:focus
+              border-color: grayer
+            &.ng-invalid.ng-dirty
+              border-color: orange
+          ul.error-list
+            clear: both
+            list-style: none
+            padding: 5px 0 0 150px
+            li
+              font-size: 16px
+              line-height: 1.4em
+              color: orange
+          button
+            display: block
+            height: 40px
+            line-height: 40px
+            background: orange
+            color: white
+            border: 0
+            cursor: pointer
+            font-size: 16px
+            padding: 0 15px
+            text-transform: uppercase
+            &:hover
+              background: black
+            &.disabled
+              pointer-events: none
+              background: grayer
+              opacity: 0.5
 
     .list
       list-style: none
@@ -190,28 +198,21 @@ select
         position: relative
         &:hover
           background: lightgray
-        h3
-          font-size: 20px
+        .icon
+          font-size: 50px
           line-height: 1em
-          margin-bottom: 5px
-        h4
-          font-size: 14px
-          line-height: 1em
-          text-transform: uppercase
-          font-weight: normal
-          color: darkgray
-        .distance
-          position: absolute
-          top: 20px
-          right: 20px
-          color: darkgray
-        .content
-          margin-top: 20px
-          border-top: 1px dashed gray
-          padding-top: 10px
-          .description
-            margin-top: 10px
-            line-height: 1.4em
+          width: 50px
+          height: 50px
+          text-align: center
+          float: left
+          color: gray
+        .name_address
+          padding-left: 70px
+          min-height: 50px
+          h3
+            font-size: 20px
+            line-height: 1em
+            margin-bottom: 5px
           address
             font-style: normal
             line-height: 1em
@@ -221,6 +222,19 @@ select
               &:hover
                 color: black
                 border: 0
+        .distance
+          position: absolute
+          top: 20px
+          right: 20px
+          color: darkgray
+        .content
+          clear: both
+          margin-top: 20px
+          border-top: 1px dashed gray
+          padding-top: 10px
+          .description
+            margin-top: 10px
+            line-height: 1.4em
           .links
             margin-top: 10px
             a
@@ -235,3 +249,12 @@ select
     text-align: center
     font-size: 16px
     color: grayer
+
+  #background
+    position: fixed
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    background: rgba(0,0,0,0.5)
+    z-index: 50
