@@ -21,6 +21,16 @@ module.exports = (grunt) ->
         dest: 'public/js/dist/foodportal.js'
       }
     }
+    ngAnnotate: {
+      options: {
+        singleQuotes: true
+      }
+      foodportal: {
+        files: {
+          'public/js/dist/foodportal.js': ['public/js/dist/foodportal.js']
+        }
+      }
+    }
     uglify: {
       options: {
         report: 'min'
@@ -38,9 +48,9 @@ module.exports = (grunt) ->
     }
   }
 
-  project = grunt.option('project') || 'vinch'
-
   grunt.loadNpmTasks 'grunt-contrib-concat'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
+  grunt.loadNpmTasks 'grunt-ng-annotate'
 
-  grunt.registerTask 'components', ['concat:' + project, 'uglify:' + project]
+  grunt.registerTask 'vinch', ['concat:vinch', 'uglify:vinch']
+  grunt.registerTask 'foodportal', ['concat:foodportal', 'ngAnnotate:foodportal', 'uglify:foodportal']
