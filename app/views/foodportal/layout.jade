@@ -1,4 +1,4 @@
-!!! 5
+doctype html
 //if lt IE 7
   html.no-js.lt-ie10.lt-ie9.lt-ie8.lt-ie7(lang='en', ng-app='foodPortalApp')
 //if IE 7
@@ -18,7 +18,7 @@ html.no-js(lang='en', ng-app='foodPortalApp')
     meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
     meta(name='description', content='Places, Articles, Books, Recipes and Brands curated by Sandra Cabrera de Diego and Vincent Battaglia')
     meta(property='og:image', content='http://v1n.ch/img/foodportal/thumbnail.png')
-    != css('foodportal/main')
+    link(href='/css/foodportal.css', rel='stylesheet')
     link(href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
     script(type='text/javascript', src='//use.typekit.net/pek2yuw.js')
     script(type='text/javascript') try{Typekit.load();}catch(e){}
@@ -39,19 +39,25 @@ html.no-js(lang='en', ng-app='foodPortalApp')
 
       #content(ui-view='')
 
-      footer &copy #{new Date().getFullYear()} The Food Portal
+      footer &copy; #{new Date().getFullYear()} The Food Portal
 
-    script(src='/js/dist/foodportal.min.js')
-    != js('foodportal/app')
-    != js('foodportal/controllers')
-    != js('foodportal/controllers/main-controller')
-    != js('foodportal/controllers/articles-controller')
-    != js('foodportal/controllers/books-controller')
-    != js('foodportal/controllers/places-controller')
-    != js('foodportal/controllers/products-controller')
-    != js('foodportal/controllers/recipes-controller')
-    != js('foodportal/filters')
-    != js('foodportal/services')
+    // build:js /js/dependencies/foodportal.min.js
+    script(src='/js/dependencies/foodportal.js')
+    // /build
+
+    // build:js /js/foodportal.min.js
+    script(src='/js/foodportal/app.js')
+    script(src='/js/foodportal/controllers.js')
+    script(src='/js/foodportal/controllers/main-controller.js')
+    script(src='/js/foodportal/controllers/articles-controller.js')
+    script(src='/js/foodportal/controllers/books-controller.js')
+    script(src='/js/foodportal/controllers/places-controller.js')
+    script(src='/js/foodportal/controllers/products-controller.js')
+    script(src='/js/foodportal/controllers/recipes-controller.js')
+    script(src='/js/foodportal/filters.js')
+    script(src='/js/foodportal/services.js')
+    // /build
+
     script.
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-192063-4']);

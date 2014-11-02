@@ -1,6 +1,6 @@
 - nav = [ { name: 'Home', href: '/', icon: 'fa-home' }, { name: 'About', href: '/about', icon: 'fa-user' }, { name: 'Blog', href: 'http://www.vinch.be/blog', icon: 'fa-book' }, { name: 'Experiments', href: '/experiments', icon: 'fa-flask' } ]
 
-!!! 5
+doctype html
 //if lt IE 7
   html.no-js.lt-ie10.lt-ie9.lt-ie8.lt-ie7(lang='en')
 //if IE 7
@@ -60,7 +60,7 @@ html.no-js(lang='en')
       form(method='get', action='http://www.vinch.be/blog')
         input(type='text', name='s', autocomplete='off')
 
-    script(src='/js/dist/vinch.min.js')
+    script(src= (env == 'production') ? '/js/dependencies/vinch.min.js' : '/js/dependencies/vinch.js')
     != js('vinch')
     block javascripts
     script.

@@ -3,6 +3,9 @@
 fs = require 'fs'
 http = require 'http'
 express = require 'express'
+bodyParser = require 'body-parser'
+cookieParser = require 'cookie-parser'
+favicon = require 'serve-favicon'
 ca = require 'connect-assets'
 request = require 'request'
 feedparser = require 'feedparser'
@@ -19,22 +22,24 @@ process.on 'uncaughtException', (err) ->
 
 # configuration
 
-app.configure ->
-  app.set 'views', __dirname + '/app/views'
-  app.set 'view engine', 'jade'
-  app.use express.bodyParser()
-  app.use express.cookieParser()
-  app.use express.favicon __dirname + '/public/img/favicon.ico'
-  app.use express.static __dirname + '/public'
-  app.use ca {
-    src: 'app/assets'
-    buildDir: 'public'
-  }
+env = app.settings.env or 'development'
 
-app.configure 'development', ->
+app.set 'views', __dirname + '/app/views'
+app.set 'view engine', 'jade'
+app.use bodyParser.json()
+app.use bodyParser.urlencoded { extended: false }
+app.use cookieParser()
+app.use favicon __dirname + '/public/img/favicon.ico'
+app.use express.static __dirname + '/public'
+app.use ca {
+  src: 'app/assets'
+  buildDir: 'public'
+}
+
+if 'development' == env
   app.set 'BASE_URL', 'http://localhost:3333'
 
-app.configure 'production', ->
+if 'production' == env
   app.set 'BASE_URL', 'http://v1n.ch'
 
 # middlewares
@@ -45,6 +50,7 @@ logRequest = (req, res, next) ->
 
 setLocals = (req, res, next) ->
   app.locals.currentPath = req.path
+  app.locals.env = env
   next()
 
 # routes
@@ -65,7 +71,10 @@ app.get '/klout.be', (req, res) ->
   res.render 'klout'
 
 app.get '/foodportal', (req, res) ->
-  res.render 'foodportal/layout'
+  if 'production' == env
+    res.sendFile __dirname + '/public/html/foodportal/layout.html'
+  else
+    res.render 'foodportal/layout'
 
 app.get '/foodportal/partials/:name', (req, res) ->
   res.render 'foodportal/partials/' + req.params.name
@@ -104,7 +113,7 @@ app.get '/api/photos', (req, res) ->
   request.get('https://api.instagram.com/v1/users/' + process.env.INSTAGRAM_USER_ID + '/media/recent/?access_token=' + process.env.INSTAGRAM_ACCESS_TOKEN + '&count=' + limit, {
     json: true
   }, (error, response, body) ->
-    body.data.forEach (item) ->
+    body.data?.forEach (item) ->
       photos.push {
         title: item.caption?.text
         thumbnail: item.images.thumbnail.url
@@ -134,4 +143,4 @@ app.all '*', (req, res) ->
 # server creation
 
 server.listen process.env.PORT ? '3333', ->
-  log.info 'Express server listening on port ' + server.address().port + ' in ' + app.settings.env + ' mode'
+  log.info 'Express server listening on port ' + server.address().port + ' in ' + env + ' mode'
