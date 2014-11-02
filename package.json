@@ -40,6 +40,6 @@
     "npm": "1.2.x"
   },
   "scripts": {
-    "postinstall": "./node_modules/coffee-script/bin/coffee postinstall.coffee"
+    "postinstall": "./postinstall.sh"
   }
 }
