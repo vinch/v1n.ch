@@ -123,4 +123,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-processhtml'
 
   grunt.registerTask 'dev', ['clean', 'concat:vinch', 'coffee:compile', 'concat:foodportal', 'stylus', 'watch']
-  grunt.registerTask 'build', ['clean', 'concat:vinch', 'uglify:vinch', 'coffee:join', 'concat:foodportal', 'ngAnnotate:foodportal', 'uglify:foodportal', 'stylus', 'jade', 'processhtml']
+  grunt.registerTask 'build', ['concat:vinch', 'uglify:vinch', 'coffee:join', 'concat:foodportal', 'ngAnnotate:foodportal', 'uglify:foodportal', 'stylus', 'jade', 'processhtml']
