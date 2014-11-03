@@ -36,11 +36,11 @@ app.use ca {
   buildDir: 'public'
 }
 
-if 'development' == env
+if env == 'development'
   app.set 'BASE_URL', 'http://localhost:3333'
 
-if 'production' == env
-  app.set 'BASE_URL', 'http://v1n.ch'
+if env == 'production'
+  app.set 'BASE_URL', 'http://www.v1n.ch'
 
 # middlewares
 
@@ -71,7 +71,7 @@ app.get '/klout.be', (req, res) ->
   res.render 'klout'
 
 app.get '/foodportal', (req, res) ->
-  if 'production' == env
+  if env == 'production'
     res.sendFile __dirname + '/public/html/foodportal/layout.html'
   else
     res.render 'foodportal/layout'
