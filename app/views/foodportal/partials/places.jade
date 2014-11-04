@@ -2,8 +2,8 @@ h2 Places
 
 a(ng-click='toggleForm()').add {{isVisibleForm ? '–' : '+'}}
 
-.form_container(ng-show='isVisibleForm', ng-class='{saving: saving}')
-  form(novalidate, name='addPlaceYelpForm', ng-submit='submitYelpForm()')
+.form_container(ng-show='isVisibleForm')
+  form(novalidate, name='addPlaceYelpForm', ng-submit='submitYelpForm()', ng-class='{saving: saving}')
     .line
       label(for='place-url') URL*
       input#place-url(type='text', name='url', ng-model='place.yelp.url', required)
@@ -17,7 +17,7 @@ a(ng-click='toggleForm()').add {{isVisibleForm ? '–' : '+'}}
         li This field is required
     .line
       button(ng-disabled='addPlaceYelpForm.$invalid', ng-class='{disabled: addPlaceYelpForm.$invalid}') Submit
-  form(novalidate, name='addPlaceForm', ng-submit='submitForm()')
+  form(novalidate, name='addPlaceForm', ng-submit='submitForm()', ng-class='{saving: saving}')
     .line
       label(for='place-name') Name*
       input#place-name(type='text', name='name', ng-model='place.name', required)
@@ -57,33 +57,6 @@ a(ng-click='toggleForm()').add {{isVisibleForm ? '–' : '+'}}
     .line
       button(ng-disabled='addPlaceForm.$invalid', ng-class='{disabled: addPlaceForm.$invalid}') Submit
 
-.position.info(ng-hide='position')
-  p(ng-hide='error') Retrieving your location...
-  p.error(ng-show='error') Please share your location in order to access the data.
-
-.loading.info(ng-show='position && !places')
-  p Loading data...
-
-.noresults.info(ng-show='places.length == 0')
-  p No results.
-
-ul.list
-  li(ng-repeat='place in places', ng-click='toggleVisiblePlace(place.objectId)')
-    .icon.fa.fa-birthday-cake(ng-show='place.category.name == "Bakery"')
-    .icon.fa.fa-beer(ng-show='place.category.name == "Bar"')
-    .icon.fa.fa-beer(ng-show='place.category.name == "Brewery"')
-    .icon.fa.fa-coffee(ng-show='place.category.name == "Coffee & Tea"')
-    .icon.fa.fa-tree(ng-show='place.category.name == "Farm"')
-    .icon.fa.fa-cutlery(ng-show='place.category.name == "Restaurant"')
-    .icon.fa.fa-shopping-cart(ng-show='place.category.name == "Store"')
-    .icon.fa.fa-glass(ng-show='place.category.name == "Winery"')
-    .name_address
-      h3 {{ place.name }}
-      address: a(href='http://maps.google.com/?q={{ place.formatted_address }}', target='_blank') {{ place.formatted_address }}
-    p.distance {{ place.distance | prettyDistance }}
-    .content(ng-show='visiblePlaces.indexOf(place.objectId) != -1')
-      p.description(ng-show='place.description') {{ place.description }}
-      .links
-        a.website(href='{{ place.website }}', target='_blank') {{ place.website }}
+.page(ui-view='')
 
 #background(ng-show='isVisibleForm', ng-click='hideForm()')

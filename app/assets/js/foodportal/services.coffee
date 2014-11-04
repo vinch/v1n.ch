@@ -25,6 +25,28 @@ foodPortalServices.factory 'placeService', (requestService) ->
         }
       }
       return requestService.get 'https://api.parse.com/1/classes/Place', data, { 'X-Parse-Application-Id': 'MaouOA5zAXZiXWP7Xz4b5fNr6foJQfFwbm9KmWkt', 'X-Parse-REST-API-Key': 'QMqU5f7l0XdDbXqpA31zM5wabr5t4TGORDIE6YhB' }
+    getList: (position, limit, skip) ->
+      data = {
+        include: 'category'
+        where: JSON.stringify {
+          position: {
+            '$nearSphere': {
+              __type: 'GeoPoint'
+              latitude: position.latitude
+              longitude: position.longitude
+            }
+          }
+        }
+        limit: limit
+        skip: skip
+      }
+      return requestService.get 'https://api.parse.com/1/classes/Place', data, { 'X-Parse-Application-Id': 'MaouOA5zAXZiXWP7Xz4b5fNr6foJQfFwbm9KmWkt', 'X-Parse-REST-API-Key': 'QMqU5f7l0XdDbXqpA31zM5wabr5t4TGORDIE6YhB' }
+    countAll: ->
+      data = {
+        count: 1
+        limit: 0
+      }
+      return requestService.get 'https://api.parse.com/1/classes/Place', data, { 'X-Parse-Application-Id': 'MaouOA5zAXZiXWP7Xz4b5fNr6foJQfFwbm9KmWkt', 'X-Parse-REST-API-Key': 'QMqU5f7l0XdDbXqpA31zM5wabr5t4TGORDIE6YhB' }
     create: (data) ->
       return requestService.post 'https://api.parse.com/1/classes/Place', data, { 'X-Parse-Application-Id': 'MaouOA5zAXZiXWP7Xz4b5fNr6foJQfFwbm9KmWkt', 'X-Parse-REST-API-Key': 'QMqU5f7l0XdDbXqpA31zM5wabr5t4TGORDIE6YhB' }
   }

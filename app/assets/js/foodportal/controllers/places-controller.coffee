@@ -1,21 +1,10 @@
-angular.module('foodPortalControllers').controller 'PlacesController', ($scope, geolocationService, yelpService, utilsService, placeService, placeCategoryService, mapsService) ->
+angular.module('foodPortalControllers').controller 'PlacesController', ($scope, placeService, placeCategoryService, yelpService, mapsService, utilsService) ->
   
   $scope.isVisibleForm = false
-  $scope.visiblePlaces = []
 
   placeCategoryService.getAll().then (data) ->
     $scope.categories = data.results
 
-  geolocationService().then ((position) ->
-    $scope.position = position
-    placeService.getAll(position.coords).then (data) ->
-      $scope.places = []
-      for result in data.results
-        result.distance = utilsService.distance($scope.position.coords.latitude, $scope.position.coords.longitude, result.position.latitude, result.position.longitude)
-        $scope.places.push result
-  ), (err) ->
-    $scope.error = true
-  
   $scope.hideForm = ->
     $scope.isVisibleForm = false
 
@@ -56,11 +45,8 @@ angular.module('foodPortalControllers').controller 'PlacesController', ($scope, 
               $scope.saving = false
               $scope.hideForm()
               $scope.addPlaceYelpForm.$setPristine(true)
-              place.objectId = data.objectId
-              place.distance = utilsService.distance($scope.position.coords.latitude, $scope.position.coords.longitude, latitude, longitude)
-              place.category.name = category.name
-              $scope.places.unshift place
               $scope.place = {}
+              alert('Place successfully saved!')
             ), (err) ->
               $scope.saving = false
               alert('We couldn\'t save the data in the database.')
@@ -96,21 +82,11 @@ angular.module('foodPortalControllers').controller 'PlacesController', ($scope, 
           $scope.saving = false
           $scope.hideForm()
           $scope.addPlaceForm.$setPristine(true)
-          $scope.place.objectId = data.objectId
-          $scope.place.distance = utilsService.distance($scope.position.coords.latitude, $scope.position.coords.longitude, latitude, longitude)
-          $scope.place.category.name = category.name
-          $scope.places.unshift $scope.place
           $scope.place = {}
+          alert('Place successfully saved!')
         ), (err) ->
           $scope.saving = false
           alert('We couldn\'t save the data in the database.')
       else
         $scope.saving = false
         alert('We couldn\'t locate the address you provided.')
-
-  $scope.toggleVisiblePlace = (id) ->
-    index = $scope.visiblePlaces.indexOf(id)
-    if index != -1
-      $scope.visiblePlaces.splice index, 1
-    else
-      $scope.visiblePlaces.push id
