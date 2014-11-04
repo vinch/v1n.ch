@@ -70,7 +70,7 @@ a(ng-click='toggleForm()').add {{isVisibleForm ? '–' : '+'}}
 ul.list
   li(ng-repeat='place in places', ng-click='toggleVisiblePlace(place.objectId)')
     .icon.fa.fa-birthday-cake(ng-show='place.category.name == "Bakery"')
-    .icon.fa.fa-beer(ng-show='place.category.name == "Brewery"')
+    .icon.fa.fa-beer(ng-show='place.category.name == "Bar/Brewery"')
     .icon.fa.fa-coffee(ng-show='place.category.name == "Coffee & Tea"')
     .icon.fa.fa-tree(ng-show='place.category.name == "Farm"')
     .icon.fa.fa-cutlery(ng-show='place.category.name == "Restaurant"')
