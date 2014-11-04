@@ -117,14 +117,14 @@ select
       top: 70px
       z-index: 100
       border-top: 1px solid gray
+      &.saving
+        pointer-events: none
+        opacity: 0.5
       form
         background: lightergray
         padding: 20px
         border: 1px solid gray
         border-top: 0
-        &.saving
-          pointer-events: none
-          opacity: 0.5
         .line
           clearfix()
           margin-bottom: 10px

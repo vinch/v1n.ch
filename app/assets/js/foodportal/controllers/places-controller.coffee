@@ -23,6 +23,7 @@ angular.module('foodPortalControllers').controller 'PlacesController', ($scope, 
     $scope.isVisibleForm = !$scope.isVisibleForm
 
   $scope.submitYelpForm = ->
+    $scope.saving = true
     if $scope.place.yelp.url.indexOf('http://www.yelp.com/biz/') == 0
       slug = $scope.place.yelp.url.substring(24)
       category = JSON.parse($scope.place.yelp.category)
@@ -51,8 +52,6 @@ angular.module('foodPortalControllers').controller 'PlacesController', ($scope, 
             }
             place.formatted_address = data.results[0].formatted_address
 
-            $scope.saving = true
-
             placeService.create(place).then ((data) ->
               $scope.saving = false
               $scope.hideForm()
@@ -66,11 +65,14 @@ angular.module('foodPortalControllers').controller 'PlacesController', ($scope, 
               $scope.saving = false
               alert('We couldn\'t save the data in the database.')
           else
+            $scope.saving = false
             alert('We couldn\'t locate the address you provided.')
     else
+      $scope.saving = false
       alert('This URL is not a valid Yelp URL.')
 
   $scope.submitForm = ->
+    $scope.saving = true
     mapsService.geocode($scope.place.address + ', ' + $scope.place.zipcode + ' ' + $scope.place.city + ', ' + $scope.place.country).then (data) ->
       if data.status == 'OK'
         latitude = data.results[0].geometry.location.lat
@@ -90,8 +92,6 @@ angular.module('foodPortalControllers').controller 'PlacesController', ($scope, 
         }
         $scope.place.formatted_address = formatted_address
 
-        $scope.saving = true
-
         placeService.create($scope.place).then ((data) ->
           $scope.saving = false
           $scope.hideForm()
@@ -105,6 +105,7 @@ angular.module('foodPortalControllers').controller 'PlacesController', ($scope, 
           $scope.saving = false
           alert('We couldn\'t save the data in the database.')
       else
+        $scope.saving = false
         alert('We couldn\'t locate the address you provided.')
 
   $scope.toggleVisiblePlace = (id) ->
