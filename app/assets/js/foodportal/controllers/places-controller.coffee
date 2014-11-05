@@ -81,6 +81,11 @@ angular.module('foodPortalControllers').controller 'PlacesController', ($rootSco
               $scope.saving = false
               $scope.hideForm()
               $scope.addPlaceYelpForm.$setPristine(true)
+              place.objectId = data.objectId
+              place.distance = utilsService.distance($scope.position.coords.latitude, $scope.position.coords.longitude, latitude, longitude)
+              place.category.name = 'Others'
+              place.category.name = category.name
+              $scope.places.unshift place
               $scope.place = {}
               alert('Place successfully saved!')
             ), (err) ->
@@ -118,6 +123,10 @@ angular.module('foodPortalControllers').controller 'PlacesController', ($rootSco
           $scope.saving = false
           $scope.hideForm()
           $scope.addPlaceForm.$setPristine(true)
+          $scope.place.objectId = data.objectId
+          $scope.place.distance = utilsService.distance($scope.position.coords.latitude, $scope.position.coords.longitude, latitude, longitude)
+          $scope.place.category.name = category.name
+          $scope.places.unshift $scope.place
           $scope.place = {}
           alert('Place successfully saved!')
         ), (err) ->
