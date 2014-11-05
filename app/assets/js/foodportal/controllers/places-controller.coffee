@@ -1,9 +1,45 @@
-angular.module('foodPortalControllers').controller 'PlacesController', ($scope, placeService, placeCategoryService, yelpService, mapsService, utilsService) ->
+angular.module('foodPortalControllers').controller 'PlacesController', ($rootScope, $scope, geolocationService, placeService, placeCategoryService, yelpService, mapsService, utilsService) ->
   
   $scope.isVisibleForm = false
+  $scope.currentPage = 1
+  $scope.visiblePlaces = []
+  $scope.places = []
+  $scope.loading = false
 
   placeCategoryService.getAll().then (data) ->
     $scope.categories = data.results
+
+  placeService.countAll().then (data) ->
+    $scope.total = data.count
+
+  getPlacesList = ->
+    limit = 20
+    $scope.loading = true
+    placeService.getList($rootScope.position.coords, limit, ($scope.currentPage-1)*limit).then (data) ->
+      $scope.loading = false
+      for result in data.results
+        result.distance = utilsService.distance($scope.position.coords.latitude, $scope.position.coords.longitude, result.position.latitude, result.position.longitude)
+        $scope.places.push result
+
+  if $rootScope.position
+    getPlacesList()
+  else
+    geolocationService().then ((position) ->
+      $rootScope.position = position
+      getPlacesList()
+    ), (err) ->
+      $scope.error = true
+
+  $scope.toggleVisiblePlace = (id) ->
+    index = $scope.visiblePlaces.indexOf(id)
+    if index != -1
+      $scope.visiblePlaces.splice index, 1
+    else
+      $scope.visiblePlaces.push id
+
+  $scope.loadMore = ->
+    $scope.currentPage++
+    getPlacesList()
 
   $scope.hideForm = ->
     $scope.isVisibleForm = false

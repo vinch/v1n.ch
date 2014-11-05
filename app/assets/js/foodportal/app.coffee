@@ -3,18 +3,11 @@ foodPortalApp = angular.module 'foodPortalApp', ['ui.router', 'foodPortalControl
 foodPortalApp.config ($stateProvider, $urlRouterProvider) ->
   
   $urlRouterProvider.otherwise '/places'
-  $urlRouterProvider.when '/places', '/places/1'
 
   $stateProvider.state 'places', {
     url: '/places'
     templateUrl: 'foodportal/partials/places'
     controller: 'PlacesController'
-  }
-
-  $stateProvider.state 'places.page', {
-    url: '/:page'
-    templateUrl: 'foodportal/partials/places-page'
-    controller: 'PlacesPageController'
   }
 
   $stateProvider.state 'articles', {

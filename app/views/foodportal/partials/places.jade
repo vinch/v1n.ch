@@ -57,6 +57,36 @@ a(ng-click='toggleForm()').add {{isVisibleForm ? '–' : '+'}}
     .line
       button(ng-disabled='addPlaceForm.$invalid', ng-class='{disabled: addPlaceForm.$invalid}') Submit
 
-.page(ui-view='')
+ul.list(ng-show='places.length > 0')
+  li(ng-repeat='place in places', ng-click='toggleVisiblePlace(place.objectId)')
+    .icon.fa.fa-birthday-cake(ng-show='place.category.name == "Bakery"')
+    .icon.fa.fa-beer(ng-show='place.category.name == "Bar"')
+    .icon.fa.fa-beer(ng-show='place.category.name == "Brewery"')
+    .icon.fa.fa-coffee(ng-show='place.category.name == "Coffee & Tea"')
+    .icon.fa.fa-tree(ng-show='place.category.name == "Farm"')
+    .icon.fa.fa-cutlery(ng-show='place.category.name == "Restaurant"')
+    .icon.fa.fa-shopping-cart(ng-show='place.category.name == "Store"')
+    .icon.fa.fa-glass(ng-show='place.category.name == "Winery"')
+    .name_address
+      h3 {{ place.name }}
+      address: a(href='http://maps.google.com/?q={{ place.formatted_address }}', target='_blank') {{ place.formatted_address }}
+    p.distance {{ place.distance | prettyDistance }}
+    .content(ng-show='visiblePlaces.indexOf(place.objectId) != -1')
+      p.description(ng-show='place.description') {{ place.description }}
+      .links
+        a.website(href='{{ place.website }}', target='_blank') {{ place.website }}
+
+.noresults.info(ng-show='total == 0')
+  p No results.
+
+.position.info(ng-hide='position')
+  p(ng-hide='error') Retrieving your location...
+  p.error(ng-show='error') Please share your location in order to access the data.
+
+.loading.info(ng-show='position && loading')
+  p Loading data...
+
+.more(ng-show='places.length < total && position && !loading')
+  div(ng-click='loadMore()') Load more
 
 #background(ng-show='isVisibleForm', ng-click='hideForm()')
