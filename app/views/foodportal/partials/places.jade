@@ -48,6 +48,7 @@ a(ng-click='toggleForm()').add {{isVisibleForm ? '–' : '+'}}
     .line
       label(for='place-country') Country*
       select#place-country(name='country', ng-model='place.country', required)
+        option(value='BE') Belgium
         option(value='US') United States
       ul.error-list(ng-show='addPlaceForm.country.$invalid && addPlaceForm.country.$dirty')
         li This field is required
