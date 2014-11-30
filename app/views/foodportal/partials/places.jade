@@ -6,12 +6,12 @@ a(ng-click='toggleForm()').add {{isVisibleForm ? '–' : '+'}}
   form(novalidate, name='addPlaceYelpForm', ng-submit='submitYelpForm()', ng-class='{saving: saving}')
     .line
       label(for='place-url') URL*
-      input#place-url(type='text', name='url', ng-model='place.yelp.url', required)
+      input#place-url(type='text', name='url', ng-model='yelp.url', required)
       ul.error-list(ng-show='addPlaceYelpForm.url.$invalid && addPlaceYelpForm.url.$dirty')
         li This field is required
     .line
       label(for='place-category') Category*
-      select#place-category(name='category', ng-model='place.yelp.category', required)
+      select#place-category(name='category', ng-model='yelp.category', required)
         option(ng-repeat='category in categories', value='{{ category }}') {{ category.name }}
       ul.error-list(ng-show='addPlaceYelpForm.category.$invalid && addPlaceYelpForm.category.$dirty')
         li This field is required
@@ -56,6 +56,9 @@ a(ng-click='toggleForm()').add {{isVisibleForm ? '–' : '+'}}
       label(for='place-website') Website
       input#place-website(type='text', name='website', ng-model='place.website')
     .line
+      label(for='place-yelp') Yelp URL
+      input#place-yelp(type='text', name='yelp', ng-model='place.yelp')
+    .line
       button(ng-disabled='addPlaceForm.$invalid', ng-class='{disabled: addPlaceForm.$invalid}') Submit
 
 ul.list(ng-show='places.length > 0')
@@ -76,6 +79,7 @@ ul.list(ng-show='places.length > 0')
       p.description(ng-show='place.description') {{ place.description }}
       .links
         a.website(href='{{ place.website }}', target='_blank') {{ place.website }}
+        a.yelp(href='{{ place.yelp }}', target='_blank') {{ place.yelp }}
 
 .noresults.info(ng-show='total == 0')
   p No results.

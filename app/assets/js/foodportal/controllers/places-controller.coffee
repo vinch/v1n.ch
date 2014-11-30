@@ -49,9 +49,10 @@ angular.module('foodPortalControllers').controller 'PlacesController', ($rootSco
 
   $scope.submitYelpForm = ->
     $scope.saving = true
-    if $scope.place.yelp.url.indexOf('http://www.yelp.com/biz/') == 0
-      slug = $scope.place.yelp.url.substring(24)
-      category = JSON.parse($scope.place.yelp.category)
+    url = $scope.yelp.url
+    if url.indexOf('http://www.yelp.com/biz/') == 0
+      slug = url.substring(24)
+      category = JSON.parse($scope.yelp.category)
       yelpService.getBusiness(slug).then (data) ->
         place = {
           name: data.name
@@ -64,7 +65,7 @@ angular.module('foodPortalControllers').controller 'PlacesController', ($rootSco
           city: data.location.city
           zipcode: data.location.postal_code
           country: data.location.country_code
-          website: data.url
+          yelp: url
         }
         mapsService.geocode(data.location.address[0] + ', ' + data.location.postal_code + ' ' + data.location.city + ', ' + data.location.country_code).then (data) ->
           if data.status == 'OK'
