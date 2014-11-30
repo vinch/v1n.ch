@@ -25,12 +25,16 @@ html.no-js(lang='en', ng-app='foodPortalApp')
   
   body(ng-controller='MainController')
 
+    #menu(ng-click='toggleNav()', click-outside='clickOutsideMenu()')
+      i.fa.fa-bars
+      span Menu
+
     #container
 
       header
         h1 The Food Portal
 
-      nav.main
+      nav.main(ng-show='visibleNav')
         a(ui-sref='places', ui-sref-active='active') PLACES
         a(ui-sref='articles', ui-sref-active='active') ARTICLES
         a(ui-sref='books', ui-sref-active='active') BOOKS
@@ -55,6 +59,7 @@ html.no-js(lang='en', ng-app='foodPortalApp')
     script(src='/js/foodportal/controllers/places-page-controller.js')
     script(src='/js/foodportal/controllers/products-controller.js')
     script(src='/js/foodportal/controllers/recipes-controller.js')
+    script(src='/js/foodportal/directives.js')
     script(src='/js/foodportal/filters.js')
     script(src='/js/foodportal/services.js')
     // /build

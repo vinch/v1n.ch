@@ -1,4 +1,4 @@
-foodPortalApp = angular.module 'foodPortalApp', ['ui.router', 'foodPortalControllers', 'foodPortalFilters']
+foodPortalApp = angular.module 'foodPortalApp', ['ui.router', 'foodPortalControllers', 'foodPortalDirectives', 'foodPortalFilters']
 
 foodPortalApp.config ($stateProvider, $urlRouterProvider) ->
   

@@ -38,6 +38,27 @@ input, select, button
 select
   -webkit-appearance: none
 
+#menu
+  display: none
+  height: 40px
+  background: lightergray
+  border-bottom: 1px solid gray
+  padding: 0 20px
+  line-height: 40px
+  font-size: 16px
+  text-transform: uppercase
+  color: red
+  cursor: pointer
+  &:hover
+    color: black
+    background: lightgray
+  i
+    display: inline-block
+    width: 16px
+    height: 16px
+    text-align: center
+    margin-right: 5px
+
 #container
   max-width: 1000px
   padding: 0 20px
@@ -55,7 +76,7 @@ select
 
   nav.main
     clearfix()
-    width: 960px
+    max-width: 960px
     margin: 0 auto
     background: orange
     height: 40px
@@ -112,7 +133,8 @@ select
       line-height: 40px
 
     .form_container
-      width: 492px
+      width: 100%
+      max-width: 492px
       position: absolute
       right: 0
       top: 70px
@@ -218,7 +240,7 @@ select
             margin-bottom: 5px
           address
             font-style: normal
-            line-height: 1em
+            line-height: 1.4em
             margin-top: 10px
             a
               color: darkgray
@@ -280,3 +302,51 @@ select
     height: 100%
     background: rgba(0,0,0,0.5)
     z-index: 50
+
+@media (max-width: 640px)
+  #menu
+    display: block
+  #container
+    nav.main
+      width: 160px
+      height: auto
+      position: absolute
+      top: 40px
+      left: 0
+      a
+        float: none
+    #content
+      h2
+        font-size: 24px
+      a.add
+        width: 64px
+        height: 64px
+        line-height: 64px
+        border-top: 1px solid gray
+      .form_container
+        top: 64px
+      .list
+        li
+          .icon
+            width: 28px
+            height: 28px
+            font-size: 28px
+            margin-right: 10px
+          .name_address
+            padding-left: 0
+            h3
+              line-height: 1.4em
+          .distance
+            position: static
+            color: grayer
+
+@media (max-width: 532px)
+  #container
+    #content
+      .form_container
+        form
+          .line
+            label, input, select
+              width: 100%
+            ul.error-list
+              padding-left: 0
