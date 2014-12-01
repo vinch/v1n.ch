@@ -25,7 +25,7 @@ html.no-js(lang='en', ng-app='foodPortalApp')
   
   body(ng-controller='MainController')
 
-    #menu(ng-click='toggleNav()', click-outside='clickOutsideMenu()')
+    #menu(ng-click='toggleNav()', ng-class='{ active: visibleNav }', click-outside='clickOutsideMenu()')
       i.fa.fa-bars
       span Menu
 
