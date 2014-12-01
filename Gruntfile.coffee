@@ -21,6 +21,7 @@ module.exports = (grunt) ->
           'bower_components/angular/angular.js'
           'bower_components/ui-router/release/angular-ui-router.js'
           'bower_components/oauth-signature/dist/oauth-signature.js'
+          'bower_components/fastclick/lib/fastclick.js'
         ]
         dest: 'public/js/dependencies/foodportal.js'
       }

@@ -17,6 +17,7 @@
     "handlebars": "~1.0.0",
     "angular": "~1.2.23",
     "ui-router": "~0.2.11",
-    "oauth-signature": "~1.2.1"
+    "oauth-signature": "~1.2.1",
+    "fastclick": "~1.0.3"
   }
 }

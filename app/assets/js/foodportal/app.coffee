@@ -1,5 +1,8 @@
 foodPortalApp = angular.module 'foodPortalApp', ['ui.router', 'foodPortalControllers', 'foodPortalDirectives', 'foodPortalFilters']
 
+foodPortalApp.run ->
+  FastClick.attach document.body
+
 foodPortalApp.config ($stateProvider, $urlRouterProvider) ->
   
   $urlRouterProvider.otherwise '/places'
