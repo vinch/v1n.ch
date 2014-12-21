@@ -1,1 +1,0 @@
-angular.module('foodPortalControllers').controller 'ProductsController', ->

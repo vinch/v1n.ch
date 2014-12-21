@@ -70,15 +70,6 @@ app.get '/experiments', (req, res) ->
 app.get '/klout.be', (req, res) ->
   res.render 'klout'
 
-app.get '/foodportal', (req, res) ->
-  if env == 'production'
-    res.sendFile __dirname + '/public/html/foodportal/layout.html'
-  else
-    res.render 'foodportal/layout'
-
-app.get '/foodportal/partials/:name', (req, res) ->
-  res.render 'foodportal/partials/' + req.params.name
-
 app.get '/blog', (req, res) ->
   res.redirect 'http://www.vinch.be/blog'
 
