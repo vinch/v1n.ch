@@ -113,16 +113,6 @@ app.get '/api/photos', (req, res) ->
     res.send photos
   )
 
-# proxy
-
-app.get '/proxy', (req, res) ->
-  url = req.query.url
-  request.get(url, {
-    json: true
-  }, (error, response, body) ->
-    res.send body
-  )
-
 # 404
 
 app.all '*', (req, res) ->
