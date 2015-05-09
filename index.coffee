@@ -9,7 +9,6 @@ favicon = require 'serve-favicon'
 ca = require 'connect-assets'
 request = require 'request'
 feedparser = require 'feedparser'
-scraper = require 'scraper'
 log = require('logule').init(module)
 
 app = express()
