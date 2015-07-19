@@ -4,10 +4,12 @@
 #experiments
   section
     h3 
-      font-family: 'adelle-sans', sans-serif
-      font-size: 200px
+      font-family: 'jubilat', sans-serif
+      font-weight: 100
+      font-size: 300px
       line-height: 1em
       color: darkergray
+      margin-left: -150px
     ul
       list-style: none
       li
@@ -21,6 +23,13 @@
             color: grayer
             &:hover
               border-color: grayer
+
+@media (max-width: 1000px)
+  #experiments
+    section
+      h3
+        font-size: 200px
+        margin-left: 0
 
 @media (max-width: 500px)
   #experiments
