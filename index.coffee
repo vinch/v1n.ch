@@ -69,6 +69,9 @@ app.get '/experiments', (req, res) ->
 app.get '/klout.be', (req, res) ->
   res.render 'klout'
 
+app.get '/frontback', (req, res) ->
+  res.render 'frontback'
+
 app.get '/blog', (req, res) ->
   res.redirect 'http://www.vinch.be/blog'
 
