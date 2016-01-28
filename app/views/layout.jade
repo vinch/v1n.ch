@@ -63,6 +63,7 @@ html.no-js(lang='en')
     script(src= (env == 'production') ? '/js/dependencies/vinch.min.js' : '/js/dependencies/vinch.js')
     != js('vinch')
     block javascripts
+    script(src='//cdnjs.cloudflare.com/ajax/libs/twemoji/1.3.2/twemoji.min.js')
     script.
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-192063-4']);
@@ -74,3 +75,5 @@ html.no-js(lang='en')
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
+
+      twemoji.parse(document.body, { size: 72 })
