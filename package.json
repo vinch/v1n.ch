@@ -28,7 +28,7 @@
     "stylus": "0.40.x"
   },
   "engines": {
-    "node": "^10.1.0",
+    "node": "0.12.x",
     "npm": "1.2.x"
   },
   "scripts": {
