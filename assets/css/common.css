@@ -139,11 +139,11 @@ footer #social a.messenger i {
   width: 20px;
   height: 20px;
   margin: 10px;
-  background-image: url("/assets/img/messenger-gray.png");
+  background-image: url("/img/messenger-gray.png");
   background-size: 20px 20px;
 }
 footer #social a.messenger:hover i {
-  background-image: url("/assets/img/messenger-white.png");
+  background-image: url("/img/messenger-white.png");
 }
 footer #copyright {
   display: block;

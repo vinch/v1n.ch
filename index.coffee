@@ -28,7 +28,8 @@ app.set 'view engine', 'jade'
 app.use bodyParser.json()
 app.use bodyParser.urlencoded { extended: false }
 app.use cookieParser()
-app.use favicon __dirname + '/app/assets/img/favicon.ico'
+app.use favicon __dirname + '/assets/img/favicon.ico'
+app.use express.static('assets')
 
 if env == 'development'
   app.set 'BASE_URL', 'http://localhost:3333'
