@@ -5,15 +5,15 @@ block title
 
 block meta
   meta(name='description', content='Hi, I\'m Vinch. And this is my website.')
-  meta(property='og:image', content='http://v1n.ch/img/me.jpg')
+  meta(property='og:image', content='http://www.v1n.ch/assets/img/me.jpg')
 
 block stylesheets
-  != css('about')
+  link(rel='stylesheet', href='/assets/css/about.css')
 
 block body
   #about
     section
-      a(href='/img/me.jpg', target='_blank'): img(src='/img/me.jpg')
+      a(href='/assets/img/me.jpg', target='_blank'): img(src='/assets/img/me.jpg')
       p My name is <strong>Vincent Battaglia</strong>. I was born and grew up in Belgium. My father is Italian, which explains my last name, but my mother tongue is French. I currently live in Belgium with my wife and my daughter, after four years in San Francisco and three years in Barcelona.
       p I define myself as a <strong>Product Engineer</strong> although I’m more like a <strong>Jack-of-All-Trades</strong>. I started my career as a Full-Stack Engineer, but moved slowly away from Engineering, into a Product Management role. I studied computer science at the university and I have a significant experience in Front-End technologies (especially JavaScript), but I’m also very interested in UX and UI design. I love being involved in all stages of a project, and deliver wonderful products using modern techniques like <strong>Lean Startup</strong> and <strong>Agile</strong> (Scrum/Kanban).
       p I’m a Co-Founder and CTO at <a href='https://ludus.one' target='_blank'>Ludus</a>. In the past, I worked at <a href='http://www.emakina.com' target='_blank'>Emakina</a>, <a href='http://1md.be' target='_blank'>1MD</a>, <a href='http://www.woorank.com' target='_blank'>WooRank</a> (in Belgium), <a href='http://storify.com' target='_blank'>Storify</a> and <a href='http://instaply.com' target='_blank'>Instaply</a> (in San Francisco).

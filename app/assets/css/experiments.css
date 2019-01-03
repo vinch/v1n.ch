@@ -1,0 +1,33 @@
+#experiments section h3 {
+  font-family: 'jubilat', sans-serif;
+  font-weight: 100;
+  font-size: 200px;
+  line-height: 220px;
+  color: darkergray;
+  margin-left: -100px;
+}
+#experiments section ul {
+  list-style: none;
+}
+#experiments section ul li h4 {
+  font-family: 'adelle-sans', sans-serif;
+  font-size: 24px;
+  line-height: 1.4em;
+  margin: 20px 0 2px;
+}
+#experiments section ul li h4 a {
+  color: grayer;
+}
+#experiments section ul li h4 a:hover {
+  border-color: grayer;
+}
+@media (max-width: 1000px) {
+  #experiments section h3 {
+    margin-left: 0;
+  }
+}
+@media (max-width: 500px) {
+  #experiments section h3 {
+    font-size: 100px;
+  }
+}
