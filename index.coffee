@@ -73,7 +73,7 @@ app.get '/frontback', (req, res) ->
   res.render 'frontback'
 
 app.get '/blog', (req, res) ->
-  res.redirect 'http://www.vinch.be/blog'
+  res.redirect(301, 'http://www.vinch.be/blog/')
 
 # API
 

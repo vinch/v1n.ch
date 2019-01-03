@@ -1,4 +1,4 @@
-- nav = [ { name: 'Home', href: '/', icon: 'fa-home' }, { name: 'About', href: '/about', icon: 'fa-user' }, { name: 'Blog', href: 'http://www.vinch.be/blog', icon: 'fa-book' }, { name: 'Experiments', href: '/experiments', icon: 'fa-flask' } ]
+- nav = [ { name: 'Home', href: '/', icon: 'fa-home' }, { name: 'About', href: '/about', icon: 'fa-user' }, { name: 'Blog', href: 'http://www.vinch.be/blog/', icon: 'fa-book' }, { name: 'Experiments', href: '/experiments', icon: 'fa-flask' } ]
 
 doctype html
 //if lt IE 7
@@ -59,7 +59,7 @@ html.no-js(lang='en')
       span#copyright &copy; #{new Date().getFullYear()} Vincent Battaglia
 
     #search
-      form(method='get', action='http://www.vinch.be/blog')
+      form(method='get', action='http://www.vinch.be/blog/')
         input(type='text', name='s', autocomplete='off')
 
     script(src= (env == 'production') ? '/js/dependencies/vinch.min.js' : '/js/dependencies/vinch.js')
