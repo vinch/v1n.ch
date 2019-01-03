@@ -1,7 +1,3 @@
 .DS_Store
 .env
-bower_components
 node_modules
-public/css
-public/html
-public/js
