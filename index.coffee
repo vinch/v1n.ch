@@ -54,7 +54,8 @@ app.all '*', setLocals, logRequest, (req, res, next) ->
   next()
 
 app.get '/', (req, res) ->
-  res.render 'home'
+  # res.render 'home'
+  res.redirect(301, 'https://vinch.carrd.co')
 
 app.get '/about', (req, res) ->
   res.render 'about'
